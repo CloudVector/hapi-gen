@@ -1,0 +1,32 @@
+{
+  "name": "hapi-generator",
+  "version": "1.0.0",
+  "description": "Generator HAPI based project",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CloudVector/hapi-generator.git"
+  },
+  "keywords": [
+    "generator",
+    "hapi"
+  ],
+  "author": "Tamara Dukai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CloudVector/hapi-generator/issues"
+  },
+  "homepage": "https://github.com/CloudVector/hapi-generator#readme",
+  "dependencies": {
+    "inquirer": "^5.2.0"
+  },
+  "devDependencies": {
+    "gulp-load-plugins": "^1.5.0"
+  }
+}

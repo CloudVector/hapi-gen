@@ -1,0 +1,50 @@
+{
+  "name": "{name}",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Micro-service application built on hapi.js framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/{github}/{name}.git"
+  },
+  "keywords": [
+    "hapi",
+    "micro-service"
+  ],
+  "author": "{author}",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/{github}/{name}/issues"
+  },
+  "homepage": "https://github.com/{github}/{name}#readme",
+  "dependencies": {
+    "boom": "^7.x",
+    "config": "^1.x",
+    "hapi": "^17.x",
+    "hapi-pino": "^4.x",
+    "hapi-swagger": "^9.x",
+    "hoek": "^5.x",
+    "inert": "^5.x",
+    "joi": "^13.x",
+    "joi-objectid": "^2.x",
+    "vision": "^5.x"
+  },
+  "devDependencies": {
+    "chai": "^4.x",
+    "gulp": "^3.x",
+    "gulp-eslint": "^4.x",
+    "gulp-expect-file": "^0.x",
+    "gulp-lab": "1.x",
+    "gulp-load-plugins": "^1.x",
+    "gulp-markdown": "^2.x",
+    "gulp-param": "1.x",
+    "gulp-plumber": "^1.x",
+    "gulp-rename": "^1.x",
+    "gulp-replace": "^0.x",
+    "lab": "^15.x"
+  }
+}

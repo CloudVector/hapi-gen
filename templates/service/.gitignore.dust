@@ -1,0 +1,5 @@
+.coverData/*
+debug/*
+node_modules/*
+.coverrun
+.idea/*
