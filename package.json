@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/CloudVector/hapi-generator#readme",
   "dependencies": {
+    "@cloudvector/tools": "^1.0.0",
+    "dustjs-linkedin": "^2.7.5",
     "inquirer": "^5.2.0"
   },
   "devDependencies": {

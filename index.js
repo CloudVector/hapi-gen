@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('./lib/generate.js');
+module.exports = require('./lib/questions.js');
