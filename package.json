@@ -4,7 +4,7 @@
   "description": "Generator for HAPI based projects",
   "main": "index.js",
   "bin": {
-    "run": "./bin/global.js"
+    "hapi-gen": "./bin/global.js"
   },
   "preferGlobal": true,
   "directories": {
