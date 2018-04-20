@@ -1,10 +1,11 @@
 {
-  "name": "hapi-generator",
+  "name": "hapi-gen",
   "version": "1.0.0",
   "description": "Generator for HAPI based projects",
   "main": "index.js",
   "directories": {
-    "lib": "lib"
+    "lib": "lib",
+    "templates": "templates"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -33,6 +34,13 @@
     "inquirer": "^5.x"
   },
   "devDependencies": {
-    "gulp-load-plugins": "^1.x"
+    "code": "^5.x",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^4.x",
+    "gulp-expect-file": "^0.x",
+    "gulp-lab": "^1.x",
+    "gulp-load-plugins": "^1.x",
+    "gulp-util": "^3.x",
+    "lab": "^15.x"
   }
 }

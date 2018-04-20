@@ -1,13 +1,13 @@
 "use strict";
 
-const folders = require('./folders');
+const tools = require('@cloudvector/tools');
 const path = require('path');
 const PLUGINS_FOLDER = 'plugins';
-const config = require('config');
+//const config = require('config');
 //const MongoClient = require('mongodb').MongoClient;
 
 const settings = async () => {
-    let list = await folders(path.join(__dirname, '/../', PLUGINS_FOLDER));
+    let list = await tools.directories(path.join(__dirname, '..', PLUGINS_FOLDER));
     let result = {
         debug: (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'dev'),
         path: path.join(__dirname, '..'),
@@ -29,16 +29,16 @@ const settings = async () => {
 
     // Run for all widget look for repositories
     //console.log('Registering repositories...');
-    list.forEach((folder) => {
-        let repo = ['..', PLUGINS_FOLDER, folder, 'repository.js'].join('/');
+    list.forEach((dir) => {
+        let repo = path.join(__dirname, '..', PLUGINS_FOLDER, dir, 'repository.js');
         try {
             let Repository = require(repo);
-            result.facade[folder] = new Repository(result.db);
-            //console.log('Repository: ' + folder.toUpperCase());
+            result.facade[dir] = new Repository(result.db);
+            //console.log('Repository: ' + dir.toUpperCase());
         }
         catch (e) {
             if (e.code === 'MODULE_NOT_FOUND' && e.message.indexOf('/repository.js') > -1) {
-                console.log('skip: ' + folder.toUpperCase());
+                console.log('skip: ' + dir.toUpperCase());
             } else {
                 console.error(e);
             }
