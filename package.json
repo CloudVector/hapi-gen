@@ -1,7 +1,7 @@
 {
   "name": "hapi-generator",
   "version": "1.0.0",
-  "description": "Generator HAPI based project",
+  "description": "Generator for HAPI based projects",
   "main": "index.js",
   "directories": {
     "lib": "lib"
@@ -11,24 +11,28 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CloudVector/hapi-generator.git"
+    "url": "git+https://github.com/CloudVector/hapi-gen.git"
   },
   "keywords": [
     "generator",
-    "hapi"
+    "hapi",
+    "micro-service",
+    "plugin",
+    "web-app",
+    "widget"
   ],
   "author": "Tamara Dukai",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/CloudVector/hapi-generator/issues"
+    "url": "https://github.com/CloudVector/hapi-gen/issues"
   },
-  "homepage": "https://github.com/CloudVector/hapi-generator#readme",
+  "homepage": "https://github.com/CloudVector/hapi-gen#readme",
   "dependencies": {
-    "@cloudvector/tools": "^1.0.0",
-    "dustjs-linkedin": "^2.7.5",
-    "inquirer": "^5.2.0"
+    "@cloudvector/tools": "^2.3.0",
+    "dustjs-linkedin": "^2.x",
+    "inquirer": "^5.x"
   },
   "devDependencies": {
-    "gulp-load-plugins": "^1.5.0"
+    "gulp-load-plugins": "^1.x"
   }
 }
