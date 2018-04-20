@@ -5,6 +5,7 @@
   "description": "Micro-service application built on hapi.js framework",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,7 +23,6 @@
   },
   "homepage": "https://github.com/{github}/{name}#readme",
   "dependencies": {
-    "@cloudvector/tools": "^1.x",
     "boom": "^7.x",
     "config": "^1.x",
     "hapi": "^17.x",

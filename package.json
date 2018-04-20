@@ -33,7 +33,6 @@
   },
   "homepage": "https://github.com/CloudVector/hapi-gen#readme",
   "dependencies": {
-    "@cloudvector/tools": "^2.3.0",
     "dustjs-linkedin": "^2.x",
     "inquirer": "^5.x"
   },

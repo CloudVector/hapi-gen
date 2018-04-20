@@ -1,18 +1,18 @@
 "use strict";
 
-const tools = require('@cloudvector/tools');
+const files = require('./files.js');
 const path = require('path');
 const PLUGINS_FOLDER = 'plugins';
 //const config = require('config');
 //const MongoClient = require('mongodb').MongoClient;
 
 const settings = async () => {
-    let list = await tools.directories(path.join(__dirname, '..', PLUGINS_FOLDER));
+    let list = files.directories(path.join(__dirname, '..', PLUGINS_FOLDER));
     let result = {
         debug: (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'dev'),
         path: path.join(__dirname, '..'),
         client: null,
-        db: null, 
+        database: null,
         facade: {}
     };
 

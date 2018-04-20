@@ -2,7 +2,8 @@
 
 const pkg = require('../package.json');
 const path = require('path');
-const tools = require('@cloudvector/tools');
+const files = require('./files.js');
+const routes = require('./routes.js');
 const PLUGINS_FOLDER = 'plugins';
 // Load plugins
 let plugins = [];
@@ -36,23 +37,22 @@ plugins.push({
         }
 });
 
-const load = async () => {
-    // Load plugins
-    let list = await tools.directories(path.join(__dirname, '..', PLUGINS_FOLDER));
-    /* Register ALL widgets */
-    //console.log('Loading plugins...');
-    list.forEach((dir) => {
-            let file = path.join(__dirname, '..', PLUGINS_FOLDER, dir, 'index.js');
-            try {
-                var plugin = require(file);
-                plugins.push(plugin);
-                console.log('  Loaded: ' + dir.toUpperCase() + '  plugin...');
-            } catch (err) {
-                console.error(err);
-            }
-    });
-};
+// Default routes
+plugins.push(routes);
 
-load();
+// Load plugins
+let list = files.directories(path.join(__dirname, '..', PLUGINS_FOLDER));
+/* Register ALL widgets */
+//console.log('Loading plugins...');
+list.forEach((dir) => {
+    let file = path.join(__dirname, '..', PLUGINS_FOLDER, dir, 'index.js');
+    try {
+        var plugin = require(file);
+        plugins.push(plugin);
+        console.log('  Loaded: ' + dir.toUpperCase() + '  plugin...');
+    } catch (err) {
+        console.error(err);
+    }
+});
 
 module.exports = plugins;
