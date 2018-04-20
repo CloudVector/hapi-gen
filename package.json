@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Generator for HAPI based projects",
   "main": "index.js",
+  "bin": {
+    "run": "./bin/global.js",
+  },
+  "preferGlobal": true,
   "directories": {
     "lib": "lib",
     "templates": "templates"
