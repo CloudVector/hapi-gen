@@ -1,5 +1,5 @@
-﻿{
-  "name": "{name}",
+{
+  "name": "service-app",
   "version": "1.0.0",
   "private": true,
   "description": "Micro-service application built on hapi.js framework",
