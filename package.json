@@ -41,7 +41,6 @@
     "code": "^5.x",
     "gulp": "^3.9.1",
     "gulp-eslint": "^4.x",
-    "gulp-expect-file": "^0.x",
     "gulp-lab": "^1.x",
     "gulp-load-plugins": "^1.x",
     "gulp-util": "^3.x",
