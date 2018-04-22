@@ -4,7 +4,9 @@
   "description": "Generator for HAPI based projects",
   "main": "index.js",
   "bin": {
-    "hapi-gen": "./bin/global.js"
+    "hapi-gen": "./bin/global.js",
+    "hapigen": "./bin/global.js",
+    "hgen": "./bin/global.js"
   },
   "preferGlobal": true,
   "directories": {
@@ -33,7 +35,6 @@
   },
   "homepage": "https://github.com/CloudVector/hapi-gen#readme",
   "dependencies": {
-    "config": "^1.x",
     "dustjs-linkedin": "^2.x",
     "inquirer": "^5.x"
   },
