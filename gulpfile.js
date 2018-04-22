@@ -23,10 +23,12 @@ gulp.task('copy', (done) => {
     let list = files.directories(TEMPLATE_PATH);
     let src = path.join(__dirname, 'lib/files.js');
     list.forEach((item) => {
-        let dir = path.join(__dirname, 'templates', item, 'lib');
-        files.createDir(dir);
-        let dest = path.join(dir, 'files.js');
-        files.copy(src, dest);
+        if (item.endsWith('-app')) {
+            let dir = path.join(__dirname, 'templates', item, 'lib');
+            files.createDir(dir);
+            let dest = path.join(dir, 'files.js');
+            files.copy(src, dest);
+        }
     });
     done();
 });

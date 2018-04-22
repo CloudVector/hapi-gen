@@ -1,5 +1,5 @@
 {
-  "name": "service-app",
+  "name": "{name}",
   "version": "1.0.0",
   "private": true,
   "description": "Micro-service application built on hapi.js framework",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cloudvector/service-app.git"
+    "url": "git+https://github.com/{github}/{name}.git"
   },
   "keywords": [
     "hapi",
@@ -19,13 +19,15 @@
   "author": "{author}",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cloudvector/service-app/issues"
+    "url": "https://github.com/{github}/{name}/issues"
   },
-  "homepage": "https://github.com/cloudvector/service-app#readme",
+  "homepage": "https://github.com/{github}/{name}#readme",
   "dependencies": {
     "boom": "^7.x",
     "config": "^1.x",
+    {#hasElasticSearch}
     "elasticsearch": "^14.x",
+    {/hasElasticSearch}
     "hapi": "^17.x",
     "hapi-pino": "^4.x",
     "hapi-swagger": "^9.x",
@@ -33,8 +35,12 @@
     "inert": "^5.x",
     "joi": "^13.x",
     "joi-objectid": "^2.x",
+    {#hasMongo}
     "mongodb": "^3.x",
+    {/hasMongo}
+    {#hasMySql}
     "mysql": "^2.x",
+    {/hasMySql}
     "vision": "^5.x"
   },
   "devDependencies": {

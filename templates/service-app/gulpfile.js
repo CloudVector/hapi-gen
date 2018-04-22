@@ -6,7 +6,6 @@ const plugins = require('gulp-load-plugins')({ camelize: true });
 gulp.task('lint', function () {
     let src = ['*.js', 'lib/**/*.js', 'plugins/**/*.js'];
     return gulp.src(src)
-        .pipe(plugins.expectFile(src))
         .pipe(plugins.eslint('.eslintrc'))
         .pipe(plugins.eslint.format());
 });
@@ -21,4 +20,4 @@ gulp.task('test', function () {
 });
 
 
-gulp.task('default', ['lint', 'test']);
+gulp.task('default', ['lint']);
