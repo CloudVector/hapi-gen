@@ -33,7 +33,6 @@ gulp.task('copy', (done) => {
 
 gulp.task('lint', () => {
     let src = getLintSources();
-    console.log(src);
     return gulp.src(src)
         .pipe(plugins.eslint('.eslintrc'))
         .pipe(plugins.eslint.format());

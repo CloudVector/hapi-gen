@@ -4,22 +4,13 @@ const path = require('path');
 const fs = require('fs');
 const internals = {};
 
-/* List directories or files */
-internals.list = (dir, useFiles, extension) => {
+/* Load directories */
+internals.directories = (dir) => {
     let result = [];
     try {
         result = fs.readdirSync(dir).filter((file) => {
             let fullPath = path.join(dir, file);
-            let isDir = fs.statSync(fullPath).isDirectory();
-            let isExt = true;
-            if (extension) {
-                isExt = (path.extname(file).toLowerCase() === extension.toLowerCase());
-            }
-            if (useFiles) {
-                return (!isDir && isExt);
-            } else {
-                return isDir;
-            }
+            return fs.statSync(fullPath).isDirectory();
         });
     } catch (err) {
         if (err.code !== 'ENOENT') {
@@ -29,55 +20,43 @@ internals.list = (dir, useFiles, extension) => {
     return result;
 };
 
-// Call an event while reading and writing a file
-internals.copyWithEvent = (src, dest, event, options) => {
-    let data = {
-        src: src,
-        dest: dest,
-        content: internals.read(src, options)
-    };
-    let temp = event(data);
-    if (typeof temp.then === 'function') {
-        temp.then((d) => {
-            internals.write(d.dest, d.content);
-        });
-    } else {
-        internals.write(temp.dest, temp.content);
-    }
-};
-
-/* Copy a file or a full directory */
-internals.copyContent = (src, dest, event, options) => {
-    // Check if both is directory
-    if (fs.statSync(src).isDirectory() && fs.statSync(dest).isDirectory()) {
-        let list = internals.list(src, { files: true });
-        list.forEach((file) => {
-            let srcFile = path.join(src, file);
-            let destFile = path.join(dest, file);
-            if (file.endsWith('.dust')) {
-                internals.copyWithEvent(srcFile, destFile, event, options);
-            } else {
-                fs.copyFileSync(srcFile, destFile);
+/* Load files from directory */
+internals.files = (dir, extension) => {
+    let result = [];
+    try {
+        result = fs.readdirSync(dir).filter((file) => {
+            let fullPath = path.join(dir, file);
+            let isFile = fs.statSync(fullPath).isFile();
+            let isExt = true;
+            if (extension) {
+                isExt = (path.extname(file).toLowerCase() === extension.toLowerCase());
             }
+            return (isFile && isExt);
         });
-    } else {
-        if (src.endsWith('.dust')) {
-            internals.copyWithEvent(src, dest, event);
-        } else {
-            fs.copyFileSync(src, dest);
+    } catch (err) {
+        if (err.code !== 'ENOENT') {
+            throw err;
         }
     }
+    return result;
 };
 
 /* Copy a file or a full directory */
 internals.copy = (src, dest) => {
     // Check if both is directory
-    if (fs.statSync(src).isDirectory() && fs.statSync(dest).isDirectory()) {
-        let list = internals.list(src, { files: true });
-        list.forEach(async (file) => {
+    if (internals.isDir(src) && internals.isDir(dest)) {
+        let files = internals.files(src);
+        files.forEach(async (file) => {
             let srcFile = path.join(src, file);
             let destFile = path.join(dest, file);
             fs.copyFileSync(srcFile, destFile);
+        });
+        let dirs = internals.directories(src);
+        dirs.forEach((dir) => {
+            let srcDir = path.join(src, dir);
+            let destDir = path.join(dest, dir);
+            internals.createDir(destDir);
+            internals.copy(srcDir, destDir);
         });
     } else {
         fs.copyFileSync(src, dest);
@@ -138,48 +117,45 @@ internals.createFile = (file, content) => {
     fs.appendFileSync(file, content);
 };
 
+/* Checks if file is not a directory entry */
+internals.isDir = (file) => {
+    return fs.statSync(file).isDirectory();
+};
+
+/* Checks if file exists */
+internals.exists = (file) => {
+    let result = false;
+    try {
+        result = fs.statSync(file).isFile();
+    } catch (err) {
+        if (err.code != 'ENOENT') {
+            throw err;
+        }
+    }
+    return result;
+};
+
 module.exports = {
     // Gets the directory names for single level (not recursive!)
-    directories: (startPath) => {
-        return internals.list(startPath, false);
-    },
+    directories: internals.directories,
     // Gets the file names for single level or type if extension is specified
-    files: (startPath, extension) => {
-        return internals.list(startPath, true, extension);
-    },
+    files: internals.files,
     // Read the file content
-    read: (file, options) => {
-        return internals.read(file, options);
-    },
+    read: internals.read,
     // Write content to file
-    write: (file, content, options) => {
-        internals.write(file, content, options);
-    },
+    write: internals.write,
     // Remove a single file or directory
-    remove: (file) => {
-        internals.remove(file);
-    },
+    remove: internals.remove,
     // Rename a single file or directory
-    rename: (oldPath, newPath) => {
-        internals.rename(oldPath, newPath);
-    },
+    rename: internals.rename,
     // Copy a single file or directory
-    copy: (src, dest, event, options) => {
-        if (typeof event === 'function') {
-            internals.copyContent(src, dest, event, options);
-        } else {
-            internals.copy(src, dest);
-        }
-    },
+    copy: internals.copy,
     // Create directory
-    createDir: (dir) => {
-        internals.createDir(dir);
-    },
-    isDir: (file) => {
-        return fs.statSync(file).isDirectory();
-    },
+    createDir: internals.createDir,
     // Create file
-    createFile: (file, content) => {
-        internals.createFile(file, content);
-    }
+    createFile: internals.createFile,
+    // Checks if entry is file and not directory
+    isDir: internals.isDir,
+    // Check file existence
+    exists: internals.exists
 };
