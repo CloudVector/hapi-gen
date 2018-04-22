@@ -1,7 +1,7 @@
 'use strict';
 
 // Set default ports
-process.env.PORT = process.env.PORT || 3000;
+process.env.PORT = process.env.PORT || {port};
 process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
 const Hapi = require('hapi');
@@ -11,7 +11,7 @@ const loadSettings = require('./settings.js');
 let port = parseInt(process.env.PORT, 10);
 let host = 'localhost'; // process.env.IP;
 let settings = null;
-let dbmodule = null;
+let dbmodule = {#hasDb}'./{database}.js';{:else}null;{/hasDb}
 
 // Primary server
 const server = Hapi.server({
@@ -32,7 +32,7 @@ const init = async () => {
     await server.start();
  
     // Display console
-    console.log('Server running at:', server.info.uri);
+    console.log('Server running at:, server.info.uri);
 };
 
 // Event handlers

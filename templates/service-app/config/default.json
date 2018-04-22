@@ -1,2 +1,18 @@
 {
+    "database": {
+        "mongodb": { 
+            "url": "mongodb://localhost:27017",
+            "dbname": "sample"
+        },
+        "mysql": {
+            "host": "localhost",
+            "user": "me",
+            "password": "secret",
+            "database": "my_db"
+        },
+        "elasticsearch": {
+            "host": "localhost:9200",
+            "log": "trace"
+        }
+    }
 }
