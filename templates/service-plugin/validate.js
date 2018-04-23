@@ -20,10 +20,8 @@ schemas.save = {
 
 // List for query
 schemas.list = {
-    name: Joi.string(),
-    tag: Joi.string(),
     page: Joi.number().min(1).default(1),
-    limit: Joi.number().min(5).max(25).default(10),
+    size: Joi.number().min(5).max(25).default(10),
     sort: Joi.string().valid(['name', 'tag']).default('name')
 };
 

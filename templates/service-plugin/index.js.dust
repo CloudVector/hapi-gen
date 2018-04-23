@@ -55,7 +55,7 @@ module.exports.plugin = {
             method: 'GET',
             handler: async (request, h) => {
                 try {
-                    return await repo.get(request.params.id);
+                    return await repo.find(request.params.id);
                 } catch (err) {
                     console.error(err);
                     return Boom.boomify(err, {~lb} statusCode: 400 {~rb});
