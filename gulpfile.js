@@ -11,7 +11,7 @@ function getLintSources () {
     let list = files.directories(TEMPLATE_PATH);
     list.forEach((item) => {
         let dir = path.join(TEMPLATE_PATH, item);
-        result.push(dir + '*.js');
+        result.push(dir + '/*.js');
         result.push(dir + '/lib/*.js');
         result.push(dir + '/js/*.js');
         result.push(dir + '/test/*.js');
