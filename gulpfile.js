@@ -15,6 +15,8 @@ function getLintSources () {
         result.push(dir + '/lib/*.js');
         result.push(dir + '/js/*.js');
         result.push(dir + '/test/*.js');
+        result.push(dir + '/plugins/**/*.js');
+        result.push(dir + '/widgets/**/*.js');
     });
     return result;
 }
