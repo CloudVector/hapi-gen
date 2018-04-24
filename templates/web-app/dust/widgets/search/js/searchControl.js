@@ -9,18 +9,12 @@
 */
 var SearchControl = function (options) {
     var self = this,
-    _timer = 0,
-    _events = {
-        click: [],
-        search: []
-    },
     _dom = {},
     _search = '',
     _mode = 'search',
     initNavigation,
     initPagination,
     searchChanged,
-    menuClicked,
     pageChanged,
     createUrl,
     updateUrl,
@@ -47,7 +41,7 @@ var SearchControl = function (options) {
     self.model = null;
 
     /* Client component */
-    self.client = new SearchClient();
+    self.client = new hiso.SearchClient();
 
     /* Subcomponents */
     self.navigation = null;
@@ -100,13 +94,8 @@ var SearchControl = function (options) {
         getData(updateUrl);
     };
 
-    /* Menu clicked in navigation */
-    menuClicked = function (e, value) {
-        console.log('CLICKED: ', value);
-    };
-
     /* Page changed */
-    pageChanged = function (e, page) {
+    pageChanged = function () {
         getData(updateUrl);
     };
 
@@ -132,8 +121,6 @@ var SearchControl = function (options) {
             if (_search !== '') {
                 result.push('&search=', _search);
             }
-        } else {
-            
         }
         return result.join('');
     };
@@ -164,7 +151,7 @@ var SearchControl = function (options) {
         // Execute search
         self.client.search(request, function (response) {
             if (response && response.items) {
-                self.model = new SearchModel(response);
+                self.model = new hiso.SearchModel(response);
                 dust.render('search-items.dust', self.model, function (err, out) {
                     if (err) {
                         window.hiso.log.error(err);

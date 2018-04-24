@@ -1,6 +1,7 @@
 "use strict";
 
 const joi = require('joi');
+const path = require('path');
 
 module.exports.plugin = {
     register: (server) => {

@@ -1,4 +1,4 @@
-/*global hiso, window, document, dust, $ */
+/*global hiso, window, document, $ */
 "use strict";
 
 $(document).ready(function () {

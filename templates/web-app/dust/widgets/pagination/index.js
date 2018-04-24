@@ -1,8 +1,5 @@
 "use strict";
 
-const joi = require('joi');
-const pkg = require('../../package.json');
-
 module.exports.plugin = {
     register: (server) => {
         server.route([
@@ -20,5 +17,6 @@ module.exports.plugin = {
         }
     ]);
 },
-    pkg: pkg
+    name: 'pagination',
+    version: '1.0.0'
 }

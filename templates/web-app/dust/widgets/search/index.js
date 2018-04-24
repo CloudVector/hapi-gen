@@ -38,10 +38,9 @@ module.exports.plugin = {
         {
             path: '/api/search',
             method: 'POST',
-            handler: async (request, h) => {
+            handler: async (request) => {
                 try {
-                    let model = await facade.search.getList(request.payload);
-                    return model;
+                    return await facade.search.getList(request.payload);
                 } catch (err) {
                     return Boom.boomify(err, { statusCode: 400 });
                 }
@@ -62,10 +61,9 @@ module.exports.plugin = {
         {
             path: '/api/suggestions',
             method: 'GET',
-            handler: async function(request, reply) {
+            handler: async (request) => {
                 try {
-                    let list = await facade.search.getSuggestions(request.query.text);
-                    return list;
+                    return await facade.search.getSuggestions(request.query.text);
                 } catch (err) {
                     return Boom.boomify(err, { statusCode: 400 });
                 }

@@ -1,12 +1,12 @@
 /*global $, window, JSON */
 
 /**
-* JavaScript client for the search widget
+* JavaScript client for the {name} widget
 *
-* @class SearchClient
+* @class {nameAsClass}Client
 * @constructor
 */
-var SearchClient = function (options) {
+var {nameAsClass}Client = function (options) {
     var self = this,
     isObject,
     clearEmpty,
@@ -17,7 +17,7 @@ var SearchClient = function (options) {
     * @property options
     */
     self.options = options || {};
-    self.options.id = self.options.id || 'hapi-iso'; // Default client id
+    self.options.id = self.options.id || 'hiso'; // Default client id
 
     /* Creates default AJAX settings */
     getDefaults = function () {
@@ -63,10 +63,10 @@ var SearchClient = function (options) {
     };
 
     /**
-    * Get contact list
-    * @param {object} payload
-    * @param {function} resolve (success) callback
-    * @param {function} reject (error) callback
+    * Get search list
+    * @param {~lb}Object{~rb} payload
+    * @param {~lb}Function{~rb} resolve (success) callback
+    * @param {~lb}Function{~rb} reject (error) callback
     * @method search
     */
     self.search = function (payload, resolve, reject) {
@@ -77,14 +77,14 @@ var SearchClient = function (options) {
         cfg.data = JSON.stringify(payload);
         cfg.success = resolve;
         cfg.error = reject;
-        $.ajax(['/api/search?client_id=', self.options.id].join(''), cfg);
+        $.ajax(['{endpoint}?client_id=', self.options.id].join(''), cfg);
     };
 
     /**
     * Get contact detail
-    * @param {string} id
-    * @param {function} success callback
-    * @param {function} error callback
+    * @param {~lb}String{~rb} id
+    * @param {~lb}Function{~rb} success callback
+    * @param {~lb}Function{~rb} error callback
     * @method detail
     */
     self.detail = function (id, resolve, reject) {
@@ -93,14 +93,14 @@ var SearchClient = function (options) {
         cfg.type = 'GET';
         cfg.success = resolve;
         cfg.error = reject;
-        $.ajax(['/api/search-detail/', id, '?client_id=', self.options.id].join(''), cfg);
+        $.ajax(['{endpoint}/detail/', id, '?client_id=', self.options.id].join(''), cfg);
     };
 
     /**
     * Get suggesstions
-    * @param {string} text
-    * @param {function} success callback
-    * @param {function} error callback
+    * @param {~lb}String{~rb} text
+    * @param {~lb}Function{~rb} success callback
+    * @param {~lb}Function{~rb} error callback
     * @method suggestion
     */
     self.suggestion = function (text, resolve, reject) {
@@ -109,7 +109,7 @@ var SearchClient = function (options) {
         cfg.type = 'GET';
         cfg.success = resolve;
         cfg.error = reject;
-        $.ajax(['/api/suggestions?client_id=', self.options.id, '&text=', text.toLowerCase()].join(''), cfg);
+        $.ajax(['{endpoint}/suggestions?client_id=', self.options.id, '&text=', text.toLowerCase()].join(''), cfg);
     };
 };
 

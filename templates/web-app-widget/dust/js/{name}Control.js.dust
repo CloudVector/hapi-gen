@@ -2,12 +2,12 @@
 "use strict";
 
 /**
-* Search page with navigation and pagination
-* @class SearchControl
-* @param {object} options
+* Page with navigation and pagination
+* @class {nameAsClass}Control
+* @param {~lb}Object{~rb} options
 * @constructor
 */
-var SearchControl = function (options) {
+var {nameAsClass}Control = function (options) {
     var self = this,
     _timer = 0,
     _events = {
@@ -34,20 +34,18 @@ var SearchControl = function (options) {
     */
     self.options = options || {};
     // Set defaults
-    self.options.container = self.options.container || '#search';
+    self.options.container = self.options.container || '#{name}';
     self.options.container = typeof self.options.container === 'string' ? $(self.options.container) : self.options.container;
-    self.options.template = self.options.template || 'search-page.dust';
-    self.options.timeout = self.options.timeout || 500;
-    self.options.start = self.options.start || 3;
+    self.options.template = self.options.template || '{name}-page.dust';
 
     /**
-    * Search Model
-    * @property {SearchModel} model
+    * {nameAsClass} Model
+    * @property {nameAsClass}Model model
     */
     self.model = null;
 
     /* Client component */
-    self.client = new SearchClient();
+    self.client = new {nameAsClass}Client();
 
     /* Subcomponents */
     self.navigation = null;
@@ -57,7 +55,7 @@ var SearchControl = function (options) {
     bind = function () {
         // Create and cache DOM elements
         _dom.body = $('body');
-        _dom.items = $('#search-items');
+        _dom.items = $('#{name}-items');
         _dom.items.on('click', '.js-detail', detailClicked);
     };
 
@@ -182,8 +180,8 @@ var SearchControl = function (options) {
     /**
     * Rendering HTML content for control
     * @method render
-    * @param {function} callback
-    * @return {Undefined}
+    * @param {~lb}Function{~rb} callback
+    * @return {~lb}Undefined{~rb}
     */
     self.render = function (cb) {
         dust.render(self.options.template, self.model, function (err, out) {
@@ -197,8 +195,8 @@ var SearchControl = function (options) {
     /**
     * Initialize component
     * @method init
-    * @param {function} callback
-    * @return {Undefined}
+    * @param {~lb}Function{~rb} callback
+    * @return {~lb}Undefined{~rb}
     */
     self.init = function (cb) {
         // Init all components
@@ -206,7 +204,7 @@ var SearchControl = function (options) {
             bind();
             initNavigation(function () {
                 initPagination(function () {
-                    updateUrl('/search');
+                    updateUrl('/{name}');
                     if (typeof cb === 'function') {
                         cb();
                     }
@@ -215,7 +213,7 @@ var SearchControl = function (options) {
         };
 
         // Create model
-        self.model = (self.options.model) ? self.options.model : new hiso.SearchModel(self.options);
+        self.model = (self.options.model) ? self.options.model : new hiso.{nameAsClass}Model(self.options);
         // Check if navigation rendered on server side if not render it!
         if (self.options.container.html() === '') {
             self.render(initComponents);
@@ -226,4 +224,4 @@ var SearchControl = function (options) {
 };
 
 window.hiso = window.hiso || {};
-window.hiso.SearchControl = SearchControl;
+window.hiso.{nameAsClass}Control = {nameAsClass}Control;

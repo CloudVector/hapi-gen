@@ -6,7 +6,7 @@ const validate = require('./validate.js');
 module.exports.plugin = {
     register: (server) => {
         // Get repository 
-        const repo = server.settings.app.facade.{name};
+        const repo = server.settings.app.facade.{nameAsVariable};
         // Routes setup
         server.route([
         {

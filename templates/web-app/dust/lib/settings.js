@@ -30,7 +30,8 @@ const settings = async (dbmodule) => {
         let repo = path.join(__dirname, '..', WIDGETS_FOLDER, dir, '/js/repository.js');
         try {
             let Repository = require(repo);
-            result.facade[dir] = new Repository(result.db);
+            let name = files.toCamelCase(dir);
+            result.facade[name] = new Repository(result.db);
             //console.log('Repository: ' + dir.toUpperCase());
         }
         catch (err) {

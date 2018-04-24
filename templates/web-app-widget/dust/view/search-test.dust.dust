@@ -1,8 +1,7 @@
-{>"test-layout.dust"/}
+{~lb}>"test-layout.dust"/{~rb}
 
-{<scripts}
-    <script src="{helper}/search/assets/js/searchItemModel.js"></script>
-    <script src="{helper}/search/assets/js/searchModel.js"></script>
-    <script src="{helper}/search/assets/js/searchControl.js"></script>
-    <script src="{helper}/search/assets/js/test.js"></script>
-{/scripts}
+{~lb}<scripts{~rb}
+    <script src="{~lb}helper{~rb}/{name}/assets/js/{name}Model.js"></script>
+    <script src="{~lb}helper{~rb}/{name}/assets/js/{name}Control.js"></script>
+    <script src="{~lb}helper{~rb}/{name}/assets/js/test.js"></script>
+{~lb}/scripts{~rb}

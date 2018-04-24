@@ -1,25 +1,25 @@
-{>"layout.dust"/}
+{~lb}>"layout.dust"/{~rb}
 
-{<body}
+{~lb}<body{~rb}
         <section id="navigation">
-            {>"navigation.dust":navigation/}
+            {~lb}>"navigation.dust":navigation/{~rb}
         </section>
         <section id="search" class="portfolio-type1 w-text bg-deepgrey">
             <div class="container">
                 <div id="search-items">
-                    {>"search-items.dust"/}
+                    {~lb}>"search-items.dust"/{~rb}
                 </div>
             </div>
         </section>
     </div>
-{/body}
+{~lb}/body{~rb}
 
-{<bottom}
+{~lb}<bottom{~rb}
 <script>
     window.hiso = window.hiso || {};
-    window.hiso.search = new window.hiso.SearchControl({.|s|js});
+    window.hiso.{nameAsVariable} = new window.hiso.{nameAsClass}Control({.|s|js});
     $(document).ready(function () {
-        window.hiso.search.init();
+        window.hiso.{nameAsVariable}.init();
     });
 </script>
-{/bottom}
+{~lb}/bottom{~rb}

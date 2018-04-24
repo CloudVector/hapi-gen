@@ -1,7 +1,5 @@
 "use strict";
 
-const NavigationModel = require('./js/navigationModel.js');
-
 module.exports.plugin = {
     register: (server) => {
         // Get repository

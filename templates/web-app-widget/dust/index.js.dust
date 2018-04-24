@@ -1,11 +1,13 @@
 "use strict";
 
-const {nameAsClass}Model = require('./js/{name}Model.js');
+const joi = require('joi');
+const Boom = require('boom');
+const validation = require('./js/validation.js');
 
 module.exports.plugin = {
     register: (server) => {
         // Get facade object, contains all repositories
-        const repo = server.settings.app.facade.{name};
+        const facade = server.settings.app.facade;
         // Routes setup
         server.route([
         {
@@ -13,10 +15,15 @@ module.exports.plugin = {
             method: 'GET',
             handler: async (request, h) => {
                 try {
-                    let model = repo.list(request.query);
-                    return h.renderView('{name}', model);
+                    let promises = [];
+                    promises.push(facade.{nameAsVariable}.list(request.query));
+                    promises.push(facade.navigation.getModel());
+                    let res = await Promise.all(promises);
+                    let model = res[0];
+                    model.navigation = res[1];
+                    return h.renderView('{name}-page', model);
                 } catch (err) {
-                    return Boom.boomify(err, { statusCode: 400 });
+                    return Boom.boomify(err, {~lb} statusCode: 400 {~rb});
                 }
             },
             options: {
@@ -24,19 +31,18 @@ module.exports.plugin = {
                 validate: {
                     query: validation.search
                 },
-                tags: ['web', 'search'],
-                description: 'Search for people page'
+                tags: ['web', '{name}'],
+                description: 'People {name} page'
             }
         },
         {
-            path: '/api/search',
+            path: '{endpoint}',
             method: 'POST',
             handler: async (request, h) => {
                 try {
-                    let model = await facade.search.getList(request.payload);
-                    return model;
+                    return await facade.{nameAsVariable}.list(request.payload);
                 } catch (err) {
-                    return Boom.boomify(err, { statusCode: 400 });
+                    return Boom.boomify(err, {~lb} statusCode: 400 {~rb});
                 }
             },
             options: {
@@ -48,44 +54,20 @@ module.exports.plugin = {
                         debug: validation.debug
                     }
                 },
-                tags: ['api', 'search', 'people'],
-                description: 'Search for people'
+                tags: ['api', '{name}', 'people'],
+                description: 'People {name}'
             }
         },
         {
-            path: '/api/suggestions',
-            method: 'GET',
-            handler: async function(request, reply) {
-                try {
-                    let list = await facade.search.getSuggestions(request.query.text);
-                    return list;
-                } catch (err) {
-                    return Boom.boomify(err, { statusCode: 400 });
-                }
-            },
-            options: {
-                auth: false,
-                validate: {
-                    query: {
-                        text: joi.string().required().description('Suggestion fragement'),
-                        client_id: validation.client,
-                        debug: validation.debug
-                    }
-                },
-                tags: ['api', 'suggest', 'people'],
-                description: 'Provides suggestions for people search'
-            }
-        },
-        {
-            path: '/search/html',
+            path: '/{name}/html',
             method: 'GET',
             handler: (request, h) => {
-                return h.renderView('search');
+                return h.renderView('{name}');
             },
             options: {
                 auth: false,
-                tags: ['search', 'html'],
-                description: 'Search HTML content'
+                tags: ['{name}', 'html'],
+                description: 'HTML content for {name}'
             }
         }
     ]);

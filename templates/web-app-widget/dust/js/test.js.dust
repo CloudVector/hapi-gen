@@ -4,10 +4,10 @@
 $(document).ready(function () {
     // Set the widget name for testing
     window.hiso = window.hiso || {};
-    window.hiso.widget = 'search';
+    window.hiso.widget = '{name}';
     $('#render').on('click', function () {
-        var model = new hiso.SearchItemModel();
-        var control = new hiso.SearchControl({ container: '#widget', model: model });
+        var model = new hiso.{nameAsClass}Model();
+        var control = new hiso.{nameAsClass}Control({~lb} container: '#widget', model: model {~rb});
         control.init();
         control.onClick(function (e, args) {
             e.preventDefault();

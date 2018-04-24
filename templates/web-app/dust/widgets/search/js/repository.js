@@ -91,7 +91,6 @@ internals.requestList = function requestList (params) {
             reject(err);
         }
     });
-    return result;
 };
 
 /**

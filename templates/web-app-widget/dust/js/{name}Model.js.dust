@@ -1,0 +1,25 @@
+/*global window */
+"use strict";
+
+var isNode = (typeof module !== 'undefined' && typeof module.exports !== 'undefined');
+var tools = isNode ? require('../../../src/js/tools.js') : window.hiso.tools;
+
+/**
+* {name} Model
+* @class {nameAsClass}Model
+* @constructor
+*/
+var {nameAsClass}Model = function (data) {
+    var self = this;
+    // Assign data
+    tools.assign(self, data);
+    // Load resources
+    tools.property(self, 'res', tools.resources('{name}'));
+};
+
+if (isNode) {
+    module.exports = {nameAsClass}Model;
+} else {
+    window.hiso = window.hiso || {};
+    window.hiso.{nameAsClass}Model = {nameAsClass}Model;
+}
