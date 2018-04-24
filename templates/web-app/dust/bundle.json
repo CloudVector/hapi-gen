@@ -1,0 +1,65 @@
+{
+    "scss": {
+        "client": [
+            "src/scss/**/*.scss"
+        ]
+    },
+    "css": {
+        "client": [
+            "src/css/compiled.css"
+        ],
+        "vendor": [
+            "node_modules/bootstrap/dist/css/bootstrap.min.css",
+            "node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
+            "node_modules/bootstrap/dist/css/bootstrap-reboot.min.css"
+        ]
+    },
+    "font": {
+        "copy": {
+            "src": [
+                "src/font/*.*"
+            ],
+            "dest": "public/font"
+        }
+    },
+    "res": {
+        "en": {
+        },
+        "hu": {
+        }
+    },
+    "js": {
+        "lint": [
+            "*.js", 
+            "!lib/views.min.js",
+            "lib/*.js",
+            "src/js/**/*.js"
+        ],
+        "client": [
+            "src/js/logger.js",
+            "lib/resources.js",
+            "src/js/tools.js"
+        ],
+        "vendor": [
+            "node_modules/jquery/jquery.min.js",
+            "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+            "node_modules/bimo/dist/bimo.min.js",
+            "node_modules/dustjs-linkedin/dist/dust-core.min.js"
+        ]
+    },
+    "img": {
+        "client": [
+            "src/img/**/*.*"
+        ]
+    },
+    "view": {
+        "client": [
+        ],
+        "server": [
+            "src/view/*.dust"
+        ]
+    },
+    "test": [
+        "test/**/*.js"
+    ]
+}

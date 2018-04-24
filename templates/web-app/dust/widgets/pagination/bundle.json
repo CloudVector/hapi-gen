@@ -1,0 +1,13 @@
+{
+    "js": {
+        "client": [
+            "js/paginationModel.js",
+            "js/paginationControl.js"
+        ]
+    },
+    "view": {
+        "client": [
+            "view/pagination.dust"
+        ]
+    }
+}

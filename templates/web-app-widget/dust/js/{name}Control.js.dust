@@ -1,0 +1,100 @@
+/*global window, hiso, dust, $ */
+"use strict";
+
+/**
+* {nameAsClass}
+* @class {nameAsClass}Control
+* @param {~lb}Object{~rb} options
+* @constructor
+*/
+var {nameAsClass}Control = function (options) {
+    var self = this,
+    _timer = 0,
+    _events = {
+        click: []
+    },
+    _dom = {},
+    bind;
+
+    /**
+    * Options
+    * @property options
+    */
+    self.options = options || {};
+    // Set defaults
+    self.options.container = self.options.container || '#{name}';
+    self.options.container = typeof self.options.container === 'string' ? $(self.options.container) : self.options.container;
+    self.options.template = self.options.template || '{name}.dust';
+
+    /**
+    * {nameAsClass} Model
+    * @property {~lb}{nameAsClass}Model{~rb} model
+    */
+    self.model = null;
+
+    /* Binding events to DOM elements */
+    bind = function () {
+        // Add event handlers specified in options
+        if (self.options.click) {
+            self.onClick(self.options.click);
+        }
+
+        // Create and cache DOM elements
+        _dom.body = $('body');
+    };
+
+    /**
+    * Rendering HTML content for control
+    * @method render
+    * @param {~lb}Function{~rb} callback
+    * @return {~lb}Undefined{~rb}
+    */
+    self.render = function (cb) {
+        dust.render(self.options.template, self.model, function (err, out) {
+            self.options.container.off().html('').append(out);
+            if (typeof cb === 'function') {
+                cb();
+            }
+        });
+    };
+
+    /**
+    * Initialize component
+    * @method init
+    * @param {~lb}Function{~rb} callback
+    * @return {~lb}Undefined{~rb}
+    */
+    self.init = function (cb) {
+        // Create model
+        self.model = (self.options.model) ? self.options.model : new hiso.{nameAsClass}Model(self.options);
+        // Check if {name} rendered on server side if not render it!
+        if (self.options.container.html() === '') {
+            self.render(function () {
+                // Bind events
+                bind();
+                if (typeof cb === 'function') {
+                    cb();
+                }
+            });
+        } else {
+            // Bind events
+            bind();
+            if (typeof cb === 'function') {
+                cb();
+            }
+        }
+    };
+
+    /**
+    * Event occurs when item is clicked
+    *
+    * @event onClick
+    * @param {~lb}Function{~rb} event handler callback
+    */
+    self.onClick = function (cb) {
+        return hiso.tools.addToEvents(_events.click, cb);
+    };
+};
+
+window.hiso = window.hiso || {};
+window.hiso.NavigationControl = NavigationControl;

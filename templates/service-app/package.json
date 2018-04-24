@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "code": "^5.x",
-    "gulp": "^3.9.1",
+    "gulp": "^3.x",
     "gulp-eslint": "^4.x",
     "gulp-lab": "^1.x",
     "gulp-load-plugins": "^1.x",

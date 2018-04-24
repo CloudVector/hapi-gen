@@ -1,0 +1,12 @@
+.coverData/*
+configuration/env.json
+debug/*
+node_modules/*
+reports/*
+public/*
+lib/views.min.js
+lib/resources.js
+src/css/cloudvector.css
+.coverrun
+
+.idea/*

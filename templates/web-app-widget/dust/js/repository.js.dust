@@ -1,0 +1,96 @@
+"use strict";
+
+const {nameAsClass}Model = require('./{name}Model.js');
+
+/**
+* Repository client for {name} widget
+*
+* @class Repository
+* @constructor
+*/
+class Repository {
+
+    /**
+    * Returns model for view
+    *
+    * @method getModel
+    * @return {~lb}Promise{~rb} object of {nameAsClass}Model
+    */
+    getModel () {
+        return new Promise((resolve, reject) => {
+            try {
+                resolve(new {nameAsClass}Model());
+            } catch (err) {
+                reject(err);
+            }
+        });
+    }
+
+    /*
+    * Save 
+    * @method save
+    * @param {String} type 
+    * @param {Object} payload
+    * @return {Object} with success boolean flag set for operation result
+    */
+    save (type, payload) {
+        let result = { success: true };
+        return result;
+    }
+
+    /*
+    * Returns the list (filtered)
+    * @method list 
+    * @param {Object} search parameters
+    * @return {Object} result object
+    */
+    list (search) {
+        let result = {
+            page: search.page,
+            size: search.size,
+            sort: search.sort,
+            count: 0,
+            total: 0,
+            items: []
+        };
+        let query = {};
+        let options = {};
+
+        if (search.name) {
+            query.name = search.name;
+        }
+        if (search.page && search.limit) {
+            options.limit = search.limit;
+            options.skip = internals.skip(search.page, search.size);
+        }
+
+        // Add sort, no limit for this task
+        options.sort = search.sort;
+        // Execute search
+        return result;
+    }
+
+    /*
+    * Return a single item
+    * @method find
+    * @param {String} id 
+    * @return {Object} JSON document
+    */
+    find (id) {
+        let result = {};
+        return result;
+    }
+
+    /*
+    * Remove a single item
+    * @method remove
+    * @param {String} id
+    * @return {Object} with success boolean flag set for operation result
+    */
+    remove (id) {
+        let result = { success: true };
+        return result;
+    }
+}
+
+module.exports = Repository;

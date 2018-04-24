@@ -1,0 +1,25 @@
+{>"layout.dust"/}
+
+{<body}
+        <section id="navigation">
+            {>"navigation.dust":navigation/}
+        </section>
+        <section id="search" class="portfolio-type1 w-text bg-deepgrey">
+            <div class="container">
+                <div id="search-items">
+                    {>"search-items.dust"/}
+                </div>
+            </div>
+        </section>
+    </div>
+{/body}
+
+{<bottom}
+<script>
+    window.hiso = window.hiso || {};
+    window.hiso.search = new window.hiso.SearchControl({.|s|js});
+    $(document).ready(function () {
+        window.hiso.search.init();
+    });
+</script>
+{/bottom}

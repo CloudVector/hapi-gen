@@ -1,0 +1,12 @@
+{
+    "js": {
+        "client": [
+            "js/navigationModel.js",
+            "js/navigationControl.js"
+        ]
+    },
+    "view": {
+        "client": [
+        ]
+    }
+}

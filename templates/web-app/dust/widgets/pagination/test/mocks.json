@@ -1,0 +1,22 @@
+{
+    "normalPaging": {
+        "page": 1,
+        "size": 20,
+        "total": 245
+    },
+    "largePaging": {
+        "page": 1,
+        "size": 50,
+        "total": 8934
+    },
+    "singlePaging": {
+        "page": 1,
+        "size": 20,
+        "total": 18
+    },
+    "doublePaging": {
+        "page": 1,
+        "size": 20,
+        "total": 21
+    }
+}

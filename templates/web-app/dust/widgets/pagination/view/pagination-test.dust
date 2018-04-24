@@ -1,0 +1,8 @@
+{>"test-layout.dust"/}
+{>"test-layout.dust"/}
+
+{<bottom}
+    <script src="{helper}/pagination/assets/js/paginationModel.js"></script>
+    <script src="{helper}/pagination/assets/js/paginationControl.js"></script>
+    <script src="{helper}/pagination/assets/js/test.js"></script>
+{/bottom}

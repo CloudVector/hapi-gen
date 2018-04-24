@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Prototype isomorphic application built on hapi framework">
+    <meta name="keywords" content="prototype, isomorphic, javascript, hapi, framework, web">
+    <meta name="author" content="Tamara Dukai">
+    <!-- Favicon -->
+    <link rel="icon" href="{host}/images/favicon.ico?v={clientVersion}">
+    <!-- Site Title -->
+    <title>Isomorphic Sample</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{host}/styles/vendor-{vendorVersion}.min.css">
+    <link rel="stylesheet" type="text/css" href="{host}/styles/client-{clientVersion}.min.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,800" rel="stylesheet">
+    <script src="{host}/scripts/vendor-{vendorVersion}.min.js"></script>
+    <!-- include the full version of dust -->
+    <script src="{helper}/scripts/dustjs-linkedin/dist/dust-full.min.js"></script>
+
+    <style type="text/css">
+        .tool-container {
+            position: absolute;
+            top: 400px;
+            left: 400px;
+            border: 1px solid;
+            border-spacing: 1px;
+        }
+        .tool-message {
+            font-size: large;
+        }
+    </style>
+
+    {+header/}
+</head>
+
+<body class="has-fixed-menu">
+    <div class="container">
+        <div id="widget"></div>
+    </div>
+    <div class="tool-container">
+        <textarea rows="12" cols="40" style="height:250px;width:400px;" value="" name="test-data" id="test-data">
+        </textarea>
+        <br />
+        <input type="button" class="btn btn-primary" value="Render" id="render">
+        <br />
+        <span id="message" class="tool-message"></span>
+    </div>
+    {+body/}
+    {?debug}
+        <script src="{host}/scripts/client-{clientVersion}.js"></script>
+        <script>
+            window.hiso = window.hiso || {};
+            window.hiso.host = '{host}';
+            window.hiso.helper = '{helper}';
+            dust.onLoad = function dustLoad (templateName, options, callback) {
+                $.get([window.hiso.helper, window.hiso.widget, 'assets/view', templateName].join('/')).success(function (response) {
+                    callback(null, response);
+                }).error(function (err) {
+                    callback(err);
+                });
+            };
+        </script>
+    {:else}
+        <script src="{host}/scripts/client-{clientVersion}.min.js"></script>
+    {/debug}
+    <script src="{host}/scripts/views-{clientVersion}.min.js"></script>
+    {+bottom/}
+</body>
+</html>

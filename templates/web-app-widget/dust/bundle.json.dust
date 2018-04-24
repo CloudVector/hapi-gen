@@ -1,0 +1,13 @@
+{
+    "js": {
+        "client": [
+            "js/{name}Model.js",
+            "js/{name}Control.js"
+        ]
+    },
+    "view": {
+        "client": [
+            "{name}.dust"
+        ]
+    }
+}

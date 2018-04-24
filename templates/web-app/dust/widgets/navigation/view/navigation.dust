@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" id="nav-search-text" placeholder="Search" aria-label="Search">
+        </form>
+        <ul class="navbar-nav mr-auto">
+            {#items}
+            <li class="nav-item{active}" data-nav="{name}">
+                <a class="nav-link" href="{url}">{label}</a>
+            </li>
+            {/items}
+        </ul>
+        <div id="pagination">
+            {>"pagination.dust"/}
+        </div>
+    </div>
+</nav>

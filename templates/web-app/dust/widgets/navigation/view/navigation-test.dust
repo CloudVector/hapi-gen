@@ -1,0 +1,7 @@
+{>"test-layout.dust"/}
+
+{<bottom}
+    <script src="{helper}/navigation/assets/js/navigationModel.js"></script>
+    <script src="{helper}/navigation/assets/js/navigationControl.js"></script>
+    <script src="{helper}/navigation/assets/js/test.js"></script>
+{/bottom}

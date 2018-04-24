@@ -1,0 +1,68 @@
+{
+  "name": "web-app",
+  "version": "1.0.0",
+  "vendorVersion": "1.0.0",
+  "private": true,
+  "description": "Isomorphic web application prototype using hapi framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CloudVector/web-app.git"
+  },
+  "keywords": [
+    "isomorphic",
+    "hapi",
+    "javascript"
+  ],
+  "author": "Tamara Dukai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CloudVector/web-app/issues"
+  },
+  "homepage": "https://github.com/CloudVector/web-app#readme",
+  "dependencies": {
+    "bimo": "^1.x",
+    "boom": "^7.x",
+    "bootstrap": "^4.x",
+    "config": "^1.x",
+    "elasticsearch": "^14.x",
+    "dustjs-linkedin": "^2.x",
+    "hapi": "^17.x",
+    "hapi-pino": "^4.x",
+    "hapi-swagger": "^9.x",
+    "hoek": "^5.x",
+    "inert": "^5.x",
+    "joi": "^13.x",
+    "jquery": "^1.x",
+    "popper.js": "^1.x",
+    "mongodb": "^3.x",
+    "mysql": "^2.x",
+    "vision": "^5.x"
+  },
+  "devDependencies": {
+    "code": "^5.x",
+    "gulp": "^3.x",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-develop-server": "^0.5.2",
+    "gulp-dust": "^4.0.0",
+    "gulp-eslint": "^4.0.2",
+    "gulp-expect-file": "0.0.7",
+    "gulp-gzip": "^1.4.1",
+    "gulp-lab": "1.0.7",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-markdown": "^2.0.1",
+    "gulp-param": "1.0.3",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.6.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
+    "gulp-yuidoc": "^0.1.2",
+    "lab": "^15.x"
+  }
+}

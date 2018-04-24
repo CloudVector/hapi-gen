@@ -1,0 +1,16 @@
+{
+    "js": {
+        "client": [
+            "js/searchItemModel.js",
+            "js/searchModel.js",
+            "js/searchClient.js",
+            "js/searchControl.js"
+        ]
+    },
+    "view": {
+        "client": [
+            "view/search-item.dust",
+            "view/search-items.dust"
+        ]
+    }
+}

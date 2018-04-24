@@ -1,0 +1,64 @@
+{>"layout.dust"/}
+
+{<headers}
+    <title>Widgets Tests</title>
+{/headers}
+
+{<body}
+<div class="container" boxed sytle="overflow:visible;">
+    <div class="content">
+        <h2 class="title text-left text-regular">{name}, {version}</h2>
+        <div class="row">
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">TEST HARNESSES</h4>
+                    <p class="card-text">Test harnesses provide testing opportunity for UX designer in an isolated manner</p>
+                    <ul>
+                    {#widgets}
+                        <li><a href="{helper}/{.}/test" target="_blank">{.}</a></li>
+                    {/widgets}
+                    </ul>
+                </div><!-- / card-block -->
+            </div><!-- / card -->
+        </div>
+        <div class="row">
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">HTML</h4>
+                    <p class="card-text">Raw HTML content for each component</p>
+                    <ul>
+                    {#widgets}
+                        <li><a href="{helper}/{.}/html" target="_blank">{.}</a></li>
+                    {/widgets}
+                    </ul>
+                </div><!-- / card-block -->
+            </div><!-- / card -->
+        </div>
+        <div class="row">
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">PUBLIC API:</h4>
+                    <ul>
+                        <li><a href="{host}/docs" target="_blank">Swagger</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">RESOURCES:</h4>
+                    <ul>
+                        <li>Styles: <a href="{host}/styles/client-{version}.min.css" target="_blank">styles/client-{version}.min.css</a></li>
+                        <li>Fonts: <a href="{host}/fonts/fontawesome-webfont.woff" target="_blank">fonts/fontawesome-webfont.woff</a></li>
+                        <li>Images: <a href="{host}/images/favicon.ico" target="_blank">images/favicon.ico</a></li>
+                        <li>Vendor JS: <a href="{host}/scripts/vendor-{vendorVersion}.min.js" target="_blank">scripts/vendor-{vendorVersion}.min.js</a></li>
+                        <li>Client JS: <a href="{host}/scripts/client-{version}.min.js" target="_blank">scripts/client-{version}.min.js</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{/body}
