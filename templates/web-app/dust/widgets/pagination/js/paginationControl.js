@@ -1,4 +1,4 @@
-/*global window, dt, dust, $ */
+/*global window, hiso, dust, $ */
 "use strict";
 
 /**

@@ -21,7 +21,8 @@ class Repository {
     getModel () {
         return new Promise((resolve, reject) => {
             try {
-                resolve(new NavigationModel());
+                let model = new NavigationModel();
+                resolve(model);
             } catch (err) {
                 reject(err);
             }

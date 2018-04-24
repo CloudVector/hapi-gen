@@ -41,7 +41,8 @@
             "src/js/tools.js"
         ],
         "vendor": [
-            "node_modules/jquery/jquery.min.js",
+            "node_modules/jquery/dist/jquery.min.js",
+            "node_modules/jquery/external/sizzle/dist/sizzle.min.js",
             "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
             "node_modules/bimo/dist/bimo.min.js",
             "node_modules/dustjs-linkedin/dist/dust-core.min.js"

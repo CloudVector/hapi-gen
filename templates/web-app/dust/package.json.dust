@@ -41,7 +41,7 @@
     {#hasElasticSearch}"elasticsearch": "^14.x"{/hasElasticSearch}{#hasMongo}"mongodb": "^3.x"{/hasMongo}{#hasMySql}"mysql": "^2.x"{/hasMySql}
   },
   "devDependencies": {
-    "code": "^5.x",
+    "chai": "^4.x",
     "gulp": "^3.x",
     "gulp-concat": "^2.x",
     "gulp-cssmin": "^0.x",

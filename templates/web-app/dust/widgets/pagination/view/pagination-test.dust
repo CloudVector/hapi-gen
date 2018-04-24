@@ -1,5 +1,4 @@
 {>"test-layout.dust"/}
-{>"test-layout.dust"/}
 
 {<bottom}
     <script src="{helper}/pagination/assets/js/paginationModel.js"></script>

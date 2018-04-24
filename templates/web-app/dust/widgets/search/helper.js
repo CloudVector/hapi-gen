@@ -10,8 +10,7 @@ module.exports.plugin = {
             path: '/search/test/{file*}',
             method: 'GET',
             handler: (request, h) => {
-                let model = h.createModel(server);
-                return h.renderView(request.params.file, model);
+                return h.renderView(request.params.file);
             },
             options: {
                 auth: false,

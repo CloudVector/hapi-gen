@@ -1,5 +1,5 @@
 {
-  "name": "web-app",
+  "name": "hapi-iso",
   "version": "1.0.0",
   "vendorVersion": "1.0.0",
   "private": true,
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CloudVector/web-app.git"
+    "url": "git+https://github.com/CloudVector/hapi-iso.git"
   },
   "keywords": [
     "isomorphic",
@@ -20,16 +20,16 @@
   "author": "Tamara Dukai",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/CloudVector/web-app/issues"
+    "url": "https://github.com/CloudVector/hapi-iso/issues"
   },
-  "homepage": "https://github.com/CloudVector/web-app#readme",
+  "homepage": "https://github.com/CloudVector/hapi-iso#readme",
   "dependencies": {
     "bimo": "^1.x",
     "boom": "^7.x",
-    "bootstrap": "^4.x",
+    "bootstrap": "^4.1.0",
     "config": "^1.x",
-    "elasticsearch": "^14.x",
     "dustjs-linkedin": "^2.x",
+    "elasticsearch": "^14.x",
     "hapi": "^17.x",
     "hapi-pino": "^4.x",
     "hapi-swagger": "^9.x",
@@ -37,13 +37,13 @@
     "inert": "^5.x",
     "joi": "^13.x",
     "jquery": "^1.x",
-    "popper.js": "^1.x",
     "mongodb": "^3.x",
     "mysql": "^2.x",
+    "popper.js": "^1.x",
     "vision": "^5.x"
   },
   "devDependencies": {
-    "code": "^5.x",
+    "chai": "^4.x",
     "gulp": "^3.x",
     "gulp-concat": "^2.6.1",
     "gulp-cssmin": "^0.2.0",

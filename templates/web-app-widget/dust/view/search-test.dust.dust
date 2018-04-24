@@ -1,0 +1,8 @@
+{>"test-layout.dust"/}
+
+{<scripts}
+    <script src="{helper}/search/assets/js/searchItemModel.js"></script>
+    <script src="{helper}/search/assets/js/searchModel.js"></script>
+    <script src="{helper}/search/assets/js/searchControl.js"></script>
+    <script src="{helper}/search/assets/js/test.js"></script>
+{/scripts}

@@ -1,13 +1,16 @@
 {
     "js": {
         "client": [
-            "js/{name}Model.js",
-            "js/{name}Control.js"
+            "js/searchItemModel.js",
+            "js/searchModel.js",
+            "js/searchClient.js",
+            "js/searchControl.js"
         ]
     },
     "view": {
         "client": [
-            "{name}.dust"
+            "view/search-item.dust",
+            "view/search-items.dust"
         ]
     }
 }

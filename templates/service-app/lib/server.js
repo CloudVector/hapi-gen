@@ -10,7 +10,9 @@ const loadSettings = require('./settings.js');
 
 let port = parseInt(process.env.PORT, 10);
 let host = 'localhost'; // process.env.IP;
-let settings = null;
+let settings = {
+    close: () => {}
+};
 let dbmodule = null;
 
 // Primary server

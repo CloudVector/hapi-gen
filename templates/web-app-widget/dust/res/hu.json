@@ -1,7 +1,32 @@
 {
-    "apple": "Alma",
-    "plum": "Szilva",
-    "grape": "Szőlő",
-    "orange": "Narancs",
-    "banana": "Banán"
+    "list": {
+        "title": "People",
+        "sortBy": "Rendezze",
+        "sorts": {
+            "name-az": "A-Z",
+            "name-za": "Z-A"
+        },
+        "sort": "name-az",
+        "add": "Hozzáadás"
+    },
+    "detail": {
+        "edit": "Javítás"
+    },
+    "fields": {
+        "firstName": "Keresztnév",
+        "lastName": "Családnév",
+        "maritalStatus": "Családi állapot",
+        "email": "E-mail",
+        "phone": "Telefon",
+        "company": "Cég",
+        "department": "Osztály",
+        "income": "Jövedelem",
+        "ssn": "Egészségügyi szám",
+        "country": "Ország",
+        "region": "Régió",
+        "postalCode": "Irányítószám",
+        "city": "Város",
+        "address": "Cím",
+        "note": "Megjegyzés"
+    }
 }

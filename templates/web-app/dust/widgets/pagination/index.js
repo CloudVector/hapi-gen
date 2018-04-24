@@ -10,8 +10,7 @@ module.exports.plugin = {
             path: '/pagination/html',
             method: 'GET',
             handler: (request, h) => {
-                let model = h.createModel(server);
-                return h.renderView('pagination-default', model);
+                return h.renderView('pagination');
             },
             options: {
                 auth: false,

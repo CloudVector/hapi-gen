@@ -1,7 +1,7 @@
 'use strict';
 
-const files = require('./files.js');
 const path = require('path');
+const files = require('./files.js');
 const WIDGETS_FOLDER = 'widgets';
 let bundle = require('../bundle.json');
 

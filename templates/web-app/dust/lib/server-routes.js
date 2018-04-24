@@ -5,12 +5,15 @@ const joi = require('joi');
 
 module.exports.plugin = {
     register: (server) => {
+        // Get settings
+        const settings = server.settings.app;
+        // Register routes
         server.route([
         {
             method: "GET",
             path: "/styles/{file*}",
             handler: (request, h) => {
-                return h.file(path.join('public/css', request.params.file),{ lookupCompressed: true }).header('cache-control', 'max-age=' + server.app.MAX_AGE);
+                return h.file(path.join('public/css', request.params.file),{ lookupCompressed: true }).header('cache-control', 'max-age=' + settings.MAX_AGE);
             },
             options: {
                 auth: false,
@@ -27,7 +30,7 @@ module.exports.plugin = {
             method: "GET",
             path: "/scripts/{file*}",
             handler: (request, h) => {
-                return h.file(path.join('public/js', request.params.file), { lookupCompressed: true }).header('cache-control', 'max-age=' + server.app.MAX_AGE);
+                return h.file(path.join('public/js', request.params.file), { lookupCompressed: true }).header('cache-control', 'max-age=' + settings.MAX_AGE);
             },
             options: {
                 auth: false,
@@ -44,7 +47,7 @@ module.exports.plugin = {
             method: "GET",
             path: "/images/{file*}",
             handler: (request, h) => {
-                return h.file(path.join('public/img', request.params.file)).header('cache-control', 'max-age=' + server.app.MAX_AGE);
+                return h.file(path.join('public/img', request.params.file)).header('cache-control', 'max-age=' + settings.MAX_AGE);
             },
             options: {
                 auth: false,
@@ -61,7 +64,7 @@ module.exports.plugin = {
             method: "GET",
             path: "/fonts/{file*}",
             handler: (request, h) => {
-                return h.file(path.join('public/font', request.params.file)).header('cache-control', 'max-age=' + server.app.MAX_AGE);
+                return h.file(path.join('public/font', request.params.file)).header('cache-control', 'max-age=' + settings.MAX_AGE);
             },
             options: {
                 auth: false,

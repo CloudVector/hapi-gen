@@ -1,7 +1,0 @@
-{>"test-layout.dust"/}
-
-{<bottom}
-    <script src="{~lb}helper{~rb}/{name}/assets/js/{name}Model.js"></script>
-    <script src="{~lb}helper{~rb}/{name}/assets/js/{name}Control.js"></script>
-    <script src="{~lb}helper{~rb}/{name}/assets/js/test.js"></script>
-{/bottom}

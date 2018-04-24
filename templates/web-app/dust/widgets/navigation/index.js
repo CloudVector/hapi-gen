@@ -4,13 +4,15 @@ const NavigationModel = require('./js/navigationModel.js');
 
 module.exports.plugin = {
     register: (server) => {
+        // Get repository
+        const repo = server.settings.app.facade.navigation;
         // Routes setup
         server.route([
         {
             path: '/navigation/html',
             method: 'GET',
-            handler: (request, h) => {
-                model = h.createModel(server, NavigationModel);
+            handler: async (request, h) => {
+                let model = await repo.getModel();
                 return h.renderView('navigation', model);
             },
             options: {

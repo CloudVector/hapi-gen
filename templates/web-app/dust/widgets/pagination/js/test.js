@@ -11,10 +11,13 @@ $(document).ready(function () {
     window.hiso = window.hiso || {};
     window.hiso.widget = 'pagination';
     // Load initial json data
-    $('#test-data').val(JSON.stringify(data, null, 4));
+    var textArea = $('#test-data');
+    var json = JSON.stringify(data, null, 4);
+    textArea.val(json);
     $('#render').on('click', function () {
         try {
-            var model = new hiso.PaginationModel(JSON.parse($('#test-data').val()));
+            var temp = textArea.val();
+            var model = new hiso.PaginationModel(JSON.parse(temp));
             var control = new hiso.PaginationControl({ container: '#widget', model: model });
             control.init();
             $('#message').html(['Page count: <b>', control.model.count, '</b>'].join(''));

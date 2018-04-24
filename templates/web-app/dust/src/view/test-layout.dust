@@ -28,10 +28,9 @@
 
     <style type="text/css">
         .tool-container {
-            position: absolute;
-            top: 400px;
-            left: 400px;
-            border: 1px solid;
+            position: relative;
+            top: 200px;
+            left: 200px;
             border-spacing: 1px;
         }
         .tool-message {
@@ -43,7 +42,7 @@
 </head>
 
 <body class="has-fixed-menu">
-    <div class="container">
+    <div class="container" style="margin-top: 100px;">
         <div id="widget"></div>
     </div>
     <div class="tool-container">

@@ -4,102 +4,88 @@ const {nameAsClass}Model = require('./js/{name}Model.js');
 
 module.exports.plugin = {
     register: (server) => {
-        // Get repository 
+        // Get facade object, contains all repositories
         const repo = server.settings.app.facade.{name};
         // Routes setup
         server.route([
         {
-            path: '/{name}/html',
-            method: 'GET',
-            handler: (request, h) => {
-                model = h.createModel(server, {nameAsClass}Model);
-                return h.renderView('{name}', model);
-            },
-            options: {
-                auth: false,
-                tags: ['{name}', 'html'],
-                description: 'Navigation HTML content'
-            }
-        },
-        {
-            path: '{endpoint}{name}',
+            path: '/{name}',
             method: 'GET',
             handler: async (request, h) => {
                 try {
-                    return await repo.list();
+                    let model = repo.list(request.query);
+                    return h.renderView('{name}', model);
                 } catch (err) {
-                    console.error(err);
-                    return Boom.boomify(err, {~lb} statusCode: 400 {~rb});
+                    return Boom.boomify(err, { statusCode: 400 });
                 }
             },
             options: {
                 auth: false,
                 validate: {
-                    query: validate.list
+                    query: validation.search
                 },
-                tags: ['api', '{name}'],
-                description: 'List {name}'
+                tags: ['web', 'search'],
+                description: 'Search for people page'
             }
         },
         {
-            path: '{endpoint}{name}/{~lb}type{~rb}',
+            path: '/api/search',
             method: 'POST',
             handler: async (request, h) => {
                 try {
-                    return await repo.save(request.params.type, request.payload);
+                    let model = await facade.search.getList(request.payload);
+                    return model;
                 } catch (err) {
-                    console.error(err);
-                    return Boom.boomify(err, {~lb} statusCode: 400 {~rb});
+                    return Boom.boomify(err, { statusCode: 400 });
                 }
             },
             options: {
                 auth: false,
                 validate: {
-                    params: validate.type,
-                    payload: validate.save
+                    payload: validation.search,
+                    query: {
+                        client_id: validation.client,
+                        debug: validation.debug
+                    }
                 },
-                tags: ['api', '{name}'],
-                description: 'Save {name}'
+                tags: ['api', 'search', 'people'],
+                description: 'Search for people'
             }
         },
         {
-            path: '{endpoint}{name}/{~lb}id{~rb}',
+            path: '/api/suggestions',
             method: 'GET',
-            handler: async (request, h) => {
+            handler: async function(request, reply) {
                 try {
-                    return await repo.find(request.params.id);
+                    let list = await facade.search.getSuggestions(request.query.text);
+                    return list;
                 } catch (err) {
-                    console.error(err);
-                    return Boom.boomify(err, {~lb} statusCode: 400 {~rb});
+                    return Boom.boomify(err, { statusCode: 400 });
                 }
             },
             options: {
                 auth: false,
                 validate: {
-                    params: validate.id
+                    query: {
+                        text: joi.string().required().description('Suggestion fragement'),
+                        client_id: validation.client,
+                        debug: validation.debug
+                    }
                 },
-                tags: ['api', '{name}'],
-                description: 'Get a {name}'
+                tags: ['api', 'suggest', 'people'],
+                description: 'Provides suggestions for people search'
             }
         },
         {
-            path: '{endpoint}{name}/{~lb}id{~rb}',
-            method: 'DELETE',
-            handler: async (request, h) => {
-                try {
-                    return await repo.remove(request.params.id);
-                } catch (err) {
-                    console.error(err);
-                    return Boom.boomify(err, {~lb} statusCode: 400 {~rb});
-                }
+            path: '/search/html',
+            method: 'GET',
+            handler: (request, h) => {
+                return h.renderView('search');
             },
             options: {
                 auth: false,
-                validate: {
-                    params: validate.id
-                },
-                tags: ['api', '{name}'],
-                description: 'Delete a {name}'
+                tags: ['search', 'html'],
+                description: 'Search HTML content'
             }
         }
     ]);

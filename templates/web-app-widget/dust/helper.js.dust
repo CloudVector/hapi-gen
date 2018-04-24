@@ -1,44 +1,42 @@
 "use strict";
 
 const joi = require('joi');
-const path = require('path');
 
 module.exports.plugin = {
     register: (server) => {
         // Routes setup
         server.route([
         {
-            path: '/{name}/test/{~lb}file*{~rb}',
+            path: '/search/test/{file*}',
             method: 'GET',
             handler: (request, h) => {
-                let model = h.createModel(server);
-                return h.renderView(request.params.file, model);
+                return h.renderView(request.params.file);
             },
             options: {
                 auth: false,
                 validate: {
                     params: {
-                        file: joi.string().default('{name}-test')
+                        file: joi.string().default('search-test')
                     }
                 },
-                tags: ['{name}', 'html', 'test'],
-                description: '{nameAsClass} test web pages'
+                tags: ['search', 'html', 'test'],
+                description: 'Search test web pages'
             }
         },
         {
             method: 'GET',
-            path: '/{name}/assets/{~lb}file*{~rb}',
+            path: '/search/assets/{param*}',
             handler: (request, h) => {
-                return h.file(path.join(__dirname, request.params.file));
+                return h.file(path.join(__dirname, 'search', request.params.file));
             },
             options: {
                 auth: false,
-                tags: ['{name}','assets', 'test'],
-                description: '{nameAsClass} test assets endpoint'
+                tags: ['search','assets', 'test'],
+                description: 'Search test assets endpoint'
             }
         }
     ]);
 },
-    name: '{name}',
-    version: '{version}'
+    name: 'search',
+    version: '1.0.0'
 };

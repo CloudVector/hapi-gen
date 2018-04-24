@@ -2,12 +2,14 @@
 
 const files = require('./files.js');
 const path = require('path');
-const PLUGINS_FOLDER = 'plugins';
+const WIDGETS_FOLDER = 'widgets';
 
 const settings = async (dbmodule) => {
-    let list = files.directories(path.join(__dirname, '..', PLUGINS_FOLDER));
+    let list = files.directories(path.join(__dirname, '..', WIDGETS_FOLDER));
+    let debug = (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'dev');
     let result = {
-        debug: (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'dev'),
+        debug: debug,
+        MAX_AGE: (debug ? 1 : 31536000), // DEV: 1 sec, PROD: 1 year
         path: path.join(__dirname, '..'),
         db: null,
         close: () => {},
@@ -25,17 +27,17 @@ const settings = async (dbmodule) => {
     // Run for all widget look for repositories
     //console.log('Registering repositories...');
     list.forEach((dir) => {
-        let repo = path.join(__dirname, '..', PLUGINS_FOLDER, dir, 'repository.js');
+        let repo = path.join(__dirname, '..', WIDGETS_FOLDER, dir, '/js/repository.js');
         try {
             let Repository = require(repo);
             result.facade[dir] = new Repository(result.db);
             //console.log('Repository: ' + dir.toUpperCase());
         }
-        catch (e) {
-            if (e.code === 'MODULE_NOT_FOUND' && e.message.endsWith('repository.js') > -1) {
+        catch (err) {
+            if (err.code === 'MODULE_NOT_FOUND' && err.message.endsWith('repository.js') > -1) {
                 console.log('skipped: ' + dir.toUpperCase());
             } else {
-                console.error(e);
+                console.error(err);
             }
         }
     });
