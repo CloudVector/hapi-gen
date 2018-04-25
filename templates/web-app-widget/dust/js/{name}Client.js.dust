@@ -77,7 +77,7 @@ var {nameAsClass}Client = function (options) {
         cfg.data = JSON.stringify(payload);
         cfg.success = resolve;
         cfg.error = reject;
-        $.ajax(['{endpoint}?client_id=', self.options.id].join(''), cfg);
+        $.ajax(['{endpoint}{name}?client_id=', self.options.id].join(''), cfg);
     };
 
     /**
@@ -93,7 +93,7 @@ var {nameAsClass}Client = function (options) {
         cfg.type = 'GET';
         cfg.success = resolve;
         cfg.error = reject;
-        $.ajax(['{endpoint}/detail/', id, '?client_id=', self.options.id].join(''), cfg);
+        $.ajax(['{endpoint}{name}/detail/', id, '?client_id=', self.options.id].join(''), cfg);
     };
 
     /**
@@ -109,9 +109,9 @@ var {nameAsClass}Client = function (options) {
         cfg.type = 'GET';
         cfg.success = resolve;
         cfg.error = reject;
-        $.ajax(['{endpoint}/suggestions?client_id=', self.options.id, '&text=', text.toLowerCase()].join(''), cfg);
+        $.ajax(['{endpoint}{name}/suggestions?client_id=', self.options.id, '&text=', text.toLowerCase()].join(''), cfg);
     };
 };
 
 window.hiso = window.hiso || {};
-window.hiso.SearchClient = SearchClient;
+window.hiso.{nameAsClass}Client = {nameAsClass}Client;

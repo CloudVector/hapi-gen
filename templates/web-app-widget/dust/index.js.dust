@@ -36,7 +36,7 @@ module.exports.plugin = {
             }
         },
         {
-            path: '{endpoint}',
+            path: '{endpoint}{name}',
             method: 'POST',
             handler: async (request, h) => {
                 try {
@@ -59,7 +59,7 @@ module.exports.plugin = {
             }
         },
         {
-            path: '/{name}/html',
+            path: '{endpoint}{name}/html',
             method: 'GET',
             handler: (request, h) => {
                 return h.renderView('{name}');

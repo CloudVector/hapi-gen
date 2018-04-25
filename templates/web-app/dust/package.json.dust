@@ -28,6 +28,7 @@
     "bimo": "^1.x",
     "boom": "^7.x",
     "bootstrap": "^4.x",
+    "config": "^1.x",
     "dustjs-linkedin": "^2.x",
     "hapi": "^17.x",
     "hapi-pino": "^4.x",
@@ -37,7 +38,7 @@
     "joi": "^13.x",
     "jquery": "^1.x",
     "popper.js": "^1.x",
-    "vision": "^5.x"{#hasDb},{/hasDb},
+    "vision": "^5.x"{#hasDb},{/hasDb}
     {#hasElasticSearch}"elasticsearch": "^14.x"{/hasElasticSearch}{#hasMongo}"mongodb": "^3.x"{/hasMongo}{#hasMySql}"mysql": "^2.x"{/hasMySql}
   },
   "devDependencies": {

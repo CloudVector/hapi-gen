@@ -1,15 +1,33 @@
 "use strict";
 
+const RepositoryBase = require('../../../lib/repository-base.js');
 const {nameAsClass}Model = require('./{name}Model.js');
 const tools = require('../../../src/js/tools.js');
+const internals = {};
 
-/**
-* Repository client for {name} API
-*
+/* Calculates page offset */
+internals.skip = (page, size) => {
+    var result = 0;
+    if (page > 1) {
+        result = (page -1) * size;
+    }
+    return result;
+};
+
+/*
+* Data operation component for {name}
+* Note: convert any method to async function as required
 * @class Repository
 * @constructor
+* @extends RepositoryBase
 */
-class Repository {
+class Repository extends RepositoryBase {
+    /*
+    * Constructor to receive database (or other) options
+    */
+    constructor (db) {
+        super(db);
+    }
 
     /**
     * Returns a single contact entity by id

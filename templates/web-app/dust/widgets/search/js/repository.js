@@ -1,5 +1,6 @@
 "use strict";
 
+const RepositoryBase = require('../../../lib/repository-base.js');
 const SearchModel = require('./searchModel.js');
 const tools = require('../../../src/js/tools.js');
 const internals = {};
@@ -41,7 +42,6 @@ internals.getSortMethod = function getSortMethod (sort) {
     }
     return result;
 };
-
 
 /* Mock search filter */
 internals.filter = function filter (search, item) {
@@ -93,13 +93,20 @@ internals.requestList = function requestList (params) {
     });
 };
 
-/**
-* Repository client for contacts API
-*
+/*
+* Data operation component
+* Note: convert any method to async function as required
 * @class Repository
 * @constructor
+* @extends RepositoryBase
 */
-class Repository {
+class Repository extends RepositoryBase {
+    /*
+    * Constructor to receive database (or other) options
+    */
+    constructor (db) {
+        super(db);
+    }
 
     /**
     * Returns a single contact entity by id
