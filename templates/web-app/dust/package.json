@@ -6,7 +6,10 @@
   "description": "Isomorphic web application prototype using hapi framework",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "gulp test",
+    "lint": "gulp lint",
+    "bundle": "gulp bundle"
   },
   "repository": {
     "type": "git",
