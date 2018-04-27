@@ -28,18 +28,21 @@ function getLintSources () {
 
 gulp.task('copy', (done) => {
     let list = files.directories(TEMPLATE_PATH);
-    let src = path.join(__dirname, 'lib/files.js');
-    const copyFile = (dir) => {
+    let src1 = path.join(__dirname, 'lib/files.js');
+    let src2 = path.join(__dirname, 'test/test-files.js');
+    const copyFile = (src, dir, name) => {
         files.createDir(dir);
-        let dest = path.join(dir, 'files.js');
+        let dest = path.join(dir, name);
         files.copy(src, dest);
     };
     // Run a loop
     list.forEach((item) => {
         if (item === 'service-app') {
-            copyFile(path.join(__dirname, 'templates', item, 'lib'));
+            copyFile(src1, path.join(__dirname, 'templates', item, 'lib'), 'files.js');
+            copyFile(src2, path.join(__dirname, 'templates', item, 'test'), 'test-files.js');
         } else if (item === 'web-app') {
-            copyFile(path.join(__dirname, 'templates', item, 'dust', 'lib'));
+            copyFile(src1, path.join(__dirname, 'templates', item, 'dust', 'lib'), 'files.js');
+            copyFile(src2, path.join(__dirname, 'templates', item, 'dust', 'test'), 'test-files.js');
         }
     });
     done();
@@ -52,4 +55,13 @@ gulp.task('lint', () => {
         .pipe(plugins.eslint.format());
 });
 
-gulp.task('default', ['copy', 'lint']);
+gulp.task('test', function () {
+    let src = 'test/test*.js';
+    return gulp.src(src)
+        //.pipe(plugins.lab('--reporter html --output temp/coverage.html'))
+        .pipe(plugins.lab('--reporter console --timeout 0'))
+        .on('error', plugins.util.log);
+});
+
+
+gulp.task('default', ['copy', 'lint', 'test']);
