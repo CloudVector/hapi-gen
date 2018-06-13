@@ -2,7 +2,7 @@
 "use strict";
 
 var isNode = (typeof module !== 'undefined' && typeof module.exports !== 'undefined');
-var RESOURCES = isNode ? require('../../lib/resources.js') : window.hiso.resources;
+var RESOURCES = isNode ? require('../../lib/resources.js') : window.{namespace}.resources;
 // Create tools object
 var tools = {};
 
@@ -11,21 +11,21 @@ var tools = {};
 * Generates a random Guid like 16 digit id.
 *
 * @method guid
-* @param {number} count - if specified the length of the generated value (default is 16)
-* @return {string} unique id
+* @param {~lb}number} count - if specified the length of the generated value (default is 16)
+* @return {~lb}string} unique id
 */
 tools.guid = function (count) {
     count = count === undefined ? 16 : count;
     var tmp = new Array(count+1).join("x");
-    return tmp.replace(/x/g, function () { return Math.floor(Math.random() * count).toString(count).toUpperCase(); });
+    return tmp.replace(/x/g, function () {~lb} return Math.floor(Math.random() * count).toString(count).toUpperCase(); {~rb});
 };
 
 /**
 * Assigns properties to model
 * @method assign
-* @param {object} obj target 
-* @param {object} data source
-* @return {undefined}
+* @param {~lb}object} obj target 
+* @param {~lb}object} data source
+* @return {~lb}undefined}
 */
 tools.assign = function (obj, data) {
     data = data || {};
@@ -40,10 +40,10 @@ tools.assign = function (obj, data) {
 /**
 * Adds readonly, not enumerable property (it does not get stringified!)
 * @method property
-* @param {object} obj target
-* @param {string} name of the property
-* @param {any} value of any type
-* @return {undefined}
+* @param {~lb}object} obj target
+* @param {~lb}string} name of the property
+* @param {~lb}any} value of any type
+* @return {~lb}undefined}
 */
 tools.property = function (obj, name, value) {
     Object.defineProperty(obj, name, {
@@ -57,9 +57,9 @@ tools.property = function (obj, name, value) {
 /**
 * Creates a model by checking object or array sent and if not specified type then it creates one by passing in the object into the class
 * @method model
-* @param {object} obj single object or array of objects
-* @param {class} ModelClass type to check the object against and create it
-* @return {object} model instance of model class
+* @param {~lb}object} obj single object or array of objects
+* @param {~lb}class} ModelClass type to check the object against and create it
+* @return {~lb}object} model instance of model class
 */
 tools.model = function (obj, ModelClass) {
     var result;
@@ -79,9 +79,9 @@ tools.model = function (obj, ModelClass) {
 /**
 * Set the defaults for model input data
 * @method defaults
-* @param {object} obj with initial values
-* @param {object} defaults values
-* @return {object} object for model set with its own and default values 
+* @param {~lb}object} obj with initial values
+* @param {~lb}object} defaults values
+* @return {~lb}object} object for model set with its own and default values 
 */
 tools.defaults = function (obj, defaults) {
     obj = obj || {};
@@ -97,12 +97,12 @@ tools.defaults = function (obj, defaults) {
 /**
 * Adds readonly, not enumerable property "res" (it does not get stringified!)
 * @method resources
-* @param {string} node resource entry point
-* @param {string} section (if not specified loads the whole node of resources)
-* @param {string} language (default is "en")
-* @return {object} property content added to context
+* @param {~lb}string} node resource entry point
+* @param {~lb}string} section (if not specified loads the whole node of resources)
+* @param {~lb}string} language (default is "en")
+* @return {~lb}object} property content added to context
 */
-tools.resources = function (node, section, language) {
+tools.resources = function (node, language, section) {
     language = language || 'en';
     var value = RESOURCES[language][node];
     if (typeof section === 'string') {
@@ -115,9 +115,9 @@ tools.resources = function (node, section, language) {
 * Creates an array of select options
 *
 * @method options
-* @param {object/array} options key-value hash table or array of object: { value: 'xxx', text: 'Something' }
-* @param {string} selected item
-* @return {array} array of options in format: { value: 'xxx', text: 'Something', selected: ' selected' }
+* @param {~lb}object/array} options key-value hash table or array of object: {~lb} value: 'xxx', text: 'Something' {~rb}
+* @param {~lb}string} selected item
+* @return {~lb}array} array of options in format: {~lb} value: 'xxx', text: 'Something', selected: ' selected' {~rb}
 */
 tools.options = function (options, selected) {
     var result = [],
@@ -134,7 +134,7 @@ tools.options = function (options, selected) {
     } else {
         for (var key in options) {
             if (options.hasOwnProperty(key)) {
-                item = { value: key, text: options[key] };
+                item = {~lb} value: key, text: options[key] {~rb};
                 if (selected === item.value) {
                     item.selected = ' selected';
                 }
@@ -149,9 +149,9 @@ tools.options = function (options, selected) {
 * Adds new callback to event list but checking if the event already on the list avoiding double subscription
 *
 * @method addToEvents
-* @param {array} handlers array
-* @param {function} callback method pointer
-* @return {boolean} True if event added to the list
+* @param {~lb}array} handlers array
+* @param {~lb}function} callback method pointer
+* @return {~lb}boolean} True if event added to the list
 */
 tools.addToEvents = function (handlers, callback) {
     var result = false;
@@ -166,11 +166,11 @@ tools.addToEvents = function (handlers, callback) {
 * Runs events stored in an array and pass native event and custom arguments to callback function
 *
 * @method callEvents
-* @param {object} obj hosting
-* @param {array} handlers Array of events
-* @param {object} event object passed by the control
-* @param {object} args custom arguments
-* @return {undefined}
+* @param {~lb}object} obj hosting
+* @param {~lb}array} handlers Array of events
+* @param {~lb}object} event object passed by the control
+* @param {~lb}object} args custom arguments
+* @return {~lb}undefined}
 */
 tools.callEvents = function (obj, handlers, event, args) {
     // Run events
@@ -189,8 +189,8 @@ tools.callEvents = function (obj, handlers, event, args) {
 * Creates date from ISO string and compensates for time zone difference
 *
 * @method ISOStringToDate
-* @param {string} value (ISO 8601 format: "yyyy-MM-ddThh:mm:ss:tttZ")
-* @return {Date} standard Date
+* @param {~lb}string} value (ISO 8601 format: "yyyy-MM-ddThh:mm:ss:tttZ")
+* @return {~lb}Date} standard Date
 */
 tools.ISOStringToDate = function (value) {
     var result = value;
@@ -207,8 +207,8 @@ tools.ISOStringToDate = function (value) {
 * Converts date to ISO string and compensates for time zone difference
 *
 * @method DateToISOString
-* @param {Date} value standard Date
-* @return {string} value (ISO 8601 format: "yyyy-MM-ddThh:mm:ss:tttZ")
+* @param {~lb}Date} value standard Date
+* @return {~lb}string} value (ISO 8601 format: "yyyy-MM-ddThh:mm:ss:tttZ")
 */
 tools.DateToISOString = function (value) {
     var result = value;
@@ -225,10 +225,10 @@ tools.DateToISOString = function (value) {
 * Abbreviates large numbers to short thousands/million format 10k.. 1.2M etc.
 *
 * @method shortNumber
-* @param {number} value - number to shorten
-* @return {string} short version of number
+* @param {~lb}number} value - number to shorten
+* @return {~lb}string} short version of number
 */
-tools.shortNumber = function (value) { /* Formats large numbers to Xk or XM format */
+tools.shortNumber = function (value) {~lb} /* Formats large numbers to Xk or XM format */
     value = value === undefined || value === null || value === '' ? 0 : value;
     var result = value.toString(), // coerce to string
     mode = "";
@@ -266,23 +266,23 @@ tools.shortNumber = function (value) { /* Formats large numbers to Xk or XM form
 * Adds thousands separator
 *
 * @method formatNumber
-* @param {number} value number to format
-* @return {string} number converted to string containing the thousand separator characaters
+* @param {~lb}number} value number to format
+* @return {~lb}string} number converted to string containing the thousand separator characaters
 */
 tools.formatNumber = function (value) {
-    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return value.toString().replace(/\B(?=(\d{~lb}3{~rb})+(?!\d))/g, ",");
 };
 
 /**
 * Formatting phone number to standard
 *
 * @method formatPhone
-* @param {string} raw phone value
-* @return {string} standard formatted value
+* @param {~lb}string} raw phone value
+* @return {~lb}string} standard formatted value
 */
 tools.formatPhone = function (raw) {
     raw = raw === undefined ? '' : raw;
-    var regexObj = /^(?:\+?1[\-. ]?)?(?:\(?([0-9]{3})\)?[\-. ]?)?([0-9]{3})[\-. ]?([0-9]{4})$/;
+    var regexObj = /^(?:\+?1[\-. ]?)?(?:\(?([0-9]{~lb}3{~rb})\)?[\-. ]?)?([0-9]{~lb}3{~rb})[\-. ]?([0-9]{~lb}4{~rb})$/;
     if (regexObj.test(raw)) {
         var parts = raw.match(regexObj);
         var phone = "";
@@ -301,11 +301,11 @@ tools.formatPhone = function (raw) {
 * Validates phone number
 *
 * @method validPhone
-* @param {string} value raw phone number
-* @return {boolean} true if phone number is valid
+* @param {~lb}string} value raw phone number
+* @return {~lb}boolean} true if phone number is valid
 */
 tools.validPhone = function (value) {
-    var regexObj = /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/;
+    var regexObj = /^[(]{~lb}0,1{~rb}[0-9]{~lb}3{~rb}[)]{~lb}0,1{~rb}[-\s\.]{~lb}0,1{~rb}[0-9]{~lb}3{~rb}[-\s\.]{~lb}0,1{~rb}[0-9]{~lb}4{~rb}$/;
     return regexObj.test(value);
 };
 
@@ -313,11 +313,11 @@ tools.validPhone = function (value) {
 * Validates email
 *
 * @method validEmail
-* @param {string} value email address
-* @return {boolean} true if email is valid
+* @param {~lb}string} value email address
+* @return {~lb}boolean} true if email is valid
 */
 tools.validEmail = function (value) {
-    var regexObj = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var regexObj = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{~lb}1,3{~rb}\.[0-9]{~lb}1,3{~rb}\.[0-9]{~lb}1,3{~rb}\.[0-9]{~lb}1,3{~rb}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{~lb}2,{~rb}))$/;
     return regexObj.test(value);
 };
 
@@ -325,11 +325,11 @@ tools.validEmail = function (value) {
 * Validates url
 *
 * @method validUrl
-* @param {string} value of url
-* @return {boolean} true if url is valid
+* @param {~lb}string} value of url
+* @return {~lb}boolean} true if url is valid
 */
 tools.validUrl = function (value) {
-    var regexObj = /^(http|https):\/\/(([a-zA-Z0-9$\-_.+!*'(),;:&=]|%[0-9a-fA-F]{2})+@)?(((25[0-5]|2[0-4][0-9]|[0-1][0-9][0-9]|[1-9][0-9]|[0-9])(\.(25[0-5]|2[0-4][0-9]|[0-1][0-9][0-9]|[1-9][0-9]|[0-9])){3})|localhost|([a-zA-Z0-9\-\u00C0-\u017F]+\.)+([a-zA-Z]{2,}))(:[0-9]+)?(\/(([a-zA-Z0-9$\-_.+!*'(),;:@&=]|%[0-9a-fA-F]{2})*(\/([a-zA-Z0-9$\-_.+!*'(),;:@&=]|%[0-9a-fA-F]{2})*)*)?(\?([a-zA-Z0-9$\-_.+!*'(),;:@&=\/?]|%[0-9a-fA-F]{2})*)?(\#([a-zA-Z0-9$\-_.+!*'(),;:@&=\/?]|%[0-9a-fA-F]{2})*)?)?$/;
+    var regexObj = /^(http|https):\/\/(([a-zA-Z0-9$\-_.+!*'(),;:&=]|%[0-9a-fA-F]{~lb}2{~rb})+@)?(((25[0-5]|2[0-4][0-9]|[0-1][0-9][0-9]|[1-9][0-9]|[0-9])(\.(25[0-5]|2[0-4][0-9]|[0-1][0-9][0-9]|[1-9][0-9]|[0-9])){~lb}3{~rb})|localhost|([a-zA-Z0-9\-\u00C0-\u017F]+\.)+([a-zA-Z]{~lb}2,{~rb}))(:[0-9]+)?(\/(([a-zA-Z0-9$\-_.+!*'(),;:@&=]|%[0-9a-fA-F]{~lb}2{~rb})*(\/([a-zA-Z0-9$\-_.+!*'(),;:@&=]|%[0-9a-fA-F]{~lb}2{~rb})*)*)?(\?([a-zA-Z0-9$\-_.+!*'(),;:@&=\/?]|%[0-9a-fA-F]{~lb}2{~rb})*)?(\#([a-zA-Z0-9$\-_.+!*'(),;:@&=\/?]|%[0-9a-fA-F]{~lb}2{~rb})*)?)?$/;
     return regexObj.test(value);
 };
 
@@ -337,10 +337,10 @@ tools.validUrl = function (value) {
 * Replaces all occurences in a string
 *
 * @method replaceAll
-* @param {string} str to be manipulated
-* @param {string} find - content to be replaced
-* @param {string} replace - replacement string
-* @return {string} the value trimmed in the end
+* @param {~lb}string} str to be manipulated
+* @param {~lb}string} find - content to be replaced
+* @param {~lb}string} replace - replacement string
+* @return {~lb}string} the value trimmed in the end
 */
 tools.replaceAll = function (str, find, replace) {
     if (str) {
@@ -353,10 +353,10 @@ tools.replaceAll = function (str, find, replace) {
 * Combines first and last name
 *
 * @method fullName
-* @param {string} firstName of the person
-* @param {string} lastName of the person
-* @param {string} empty - default is "na"
-* @return {string} full name
+* @param {~lb}string} firstName of the person
+* @param {~lb}string} lastName of the person
+* @param {~lb}string} empty - default is "na"
+* @return {~lb}string} full name
 */
 tools.fullName = function (firstName, lastName, empty) {
     var result = '';
@@ -377,10 +377,10 @@ tools.fullName = function (firstName, lastName, empty) {
 * Provides initals for a name
 *
 * @method initials
-* @param {string} firstName of the person
-* @param {string} lastName of the person
-* @param {string} empty - default is "??"
-* @return {string} initials of the name
+* @param {~lb}string} firstName of the person
+* @param {~lb}string} lastName of the person
+* @param {~lb}string} empty - default is "??"
+* @return {~lb}string} initials of the name
 */
 tools.initials = function (firstName, lastName, empty) {
     var result = '';
@@ -399,6 +399,6 @@ tools.initials = function (firstName, lastName, empty) {
 if (isNode) {
     module.exports = tools;
 } else {
-    window.hiso = window.hiso || {};
-    window.hiso.tools = tools;
+    window.{namespace} = window.{namespace} || {~lb}{~rb};
+    window.{namespace}.tools = tools;
 }

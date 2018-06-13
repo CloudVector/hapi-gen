@@ -1,25 +1,18 @@
 {~lb}>"layout.dust"/{~rb}
 
 {~lb}<body{~rb}
-        <section id="navigation">
-            {~lb}>"navigation.dust":navigation/{~rb}
-        </section>
-        <section id="search" class="portfolio-type1 w-text bg-deepgrey">
-            <div class="container">
-                <div id="search-items">
-                    {~lb}>"search-items.dust"/{~rb}
-                </div>
-            </div>
+        <section id="{name}">
+            {~lb}>"{name}.dust":{name}/{~rb}
         </section>
     </div>
 {~lb}/body{~rb}
 
 {~lb}<bottom{~rb}
 <script>
-    window.hiso = window.hiso || {};
-    window.hiso.{nameAsVariable} = new window.hiso.{nameAsClass}Control({.|s|js});
+    window.{namespace} = window.{namespace} || {~lb}{~rb};
+    window.{namespace}.{nameAsVariable} = new window.{namespace}.{nameAsClass}Control({~lb}payload|s|js{~rb});
     $(document).ready(function () {
-        window.hiso.{nameAsVariable}.init();
+        window.{namespace}.{nameAsVariable}.init();
     });
 </script>
 {~lb}/bottom{~rb}

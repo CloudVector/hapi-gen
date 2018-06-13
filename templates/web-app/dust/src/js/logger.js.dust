@@ -1,10 +1,10 @@
 /*global window */
 "use strict";
 
-window.hiso = window.hiso || {};
+window.{namespace} = window.{namespace} || {~lb}{~rb};
 
 // Create global log object
-window.hiso.log = {
+window.{namespace}.log = {
     error: function (err) {
         if (console) {
             console.error(err);

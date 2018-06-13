@@ -1,10 +1,10 @@
-/*global window, hiso, dust, $ */
+/*global window, {namespace}, dust, $ */
 "use strict";
 
 /**
 * Navigation (header + side menu)
 * @class NavigationControl
-* @param {object} options
+* @param {~lb}object{~rb} options
 * @constructor
 */
 var NavigationControl = function (options) {
@@ -14,14 +14,14 @@ var NavigationControl = function (options) {
         click: [],
         search: []
     },
-    _dom = {},
+    _dom = {~lb}{~rb},
     bind;
 
     /**
     * Options
     * @property options
     */
-    self.options = options || {};
+    self.options = options || {~lb}{~rb};
     // Set defaults
     self.options.container = self.options.container || '#navigation';
     self.options.container = typeof self.options.container === 'string' ? $(self.options.container) : self.options.container;
@@ -31,7 +31,7 @@ var NavigationControl = function (options) {
 
     /**
     * Navigation Model
-    * @property {NavigationModel} model
+    * @property {~lb}NavigationModel{~rb} model
     */
     self.model = null;
 
@@ -55,7 +55,7 @@ var NavigationControl = function (options) {
             e.stopPropagation();
             _dom.items.removeClass('active');
             var value = $(this).addClass('active').data('nav');
-            hiso.tools.callEvents(this, _events.click, e, value);
+            {namespace}.tools.callEvents(this, _events.click, e, value);
         });
         // Search event
         _dom.search.on('keyup', function (e) {
@@ -63,7 +63,7 @@ var NavigationControl = function (options) {
             window.clearTimeout(_timer);
             if (value.length >= self.options.start || value.trim() === '') {
                 _timer = setTimeout(function () {
-                    hiso.tools.callEvents(this, _events.search, e, value);
+                    {namespace}.tools.callEvents(this, _events.search, e, value);
                 }, self.options.timeout);
             }
         });
@@ -72,8 +72,8 @@ var NavigationControl = function (options) {
     /**
     * Rendering HTML content for control
     * @method render
-    * @param {function} callback
-    * @return {Undefined}
+    * @param {~lb}function{~rb} callback
+    * @return {~lb}Undefined{~rb}
     */
     self.render = function (cb) {
         dust.render(self.options.template, self.model, function (err, out) {
@@ -87,12 +87,12 @@ var NavigationControl = function (options) {
     /**
     * Initialize component
     * @method init
-    * @param {function} callback
-    * @return {Undefined}
+    * @param {~lb}function{~rb} callback
+    * @return {~lb}Undefined{~rb}
     */
     self.init = function (cb) {
         // Create model
-        self.model = (self.options.model) ? self.options.model : new hiso.NavigationModel(self.options);
+        self.model = (self.options.model) ? self.options.model : new {namespace}.NavigationModel(self.options);
         // Check if navigation rendered on server side if not render it!
         if (self.options.container.html() === '') {
             self.render(function () {
@@ -115,22 +115,22 @@ var NavigationControl = function (options) {
     * Event occurs when item is clicked
     *
     * @event onClick
-    * @param {function} event handler callback
+    * @param {~lb}function{~rb} event handler callback
     */
     self.onClick = function onClick (cb) {
-        return hiso.tools.addToEvents(_events.click, cb);
+        return {namespace}.tools.addToEvents(_events.click, cb);
     };
 
     /**
     * Event occurs when searchable text typed into search bar
     *
     * @event onSearch
-    * @param {function} event handler callback
+    * @param {~lb}function{~rb} event handler callback
     */
     self.onSearch = function onSearch (cb) {
-        return hiso.tools.addToEvents(_events.search, cb);
+        return {namespace}.tools.addToEvents(_events.search, cb);
     };
 };
 
-window.hiso = window.hiso || {};
-window.hiso.NavigationControl = NavigationControl;
+window.{namespace} = window.{namespace} || {~lb}{~rb};
+window.{namespace}.NavigationControl = NavigationControl;

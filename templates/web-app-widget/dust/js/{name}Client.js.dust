@@ -17,7 +17,7 @@ var {nameAsClass}Client = function (options) {
     * @property options
     */
     self.options = options || {};
-    self.options.id = self.options.id || 'hiso'; // Default client id
+    self.options.id = self.options.id || '{namespace}'; // Default client id
 
     /* Creates default AJAX settings */
     getDefaults = function () {
@@ -63,14 +63,14 @@ var {nameAsClass}Client = function (options) {
     };
 
     /**
-    * Get search list
+    * Get list
     * @param {~lb}Object{~rb} payload
     * @param {~lb}Function{~rb} resolve (success) callback
     * @param {~lb}Function{~rb} reject (error) callback
-    * @method search
+    * @method list
     */
-    self.search = function (payload, resolve, reject) {
-        reject = reject || window.hiso.log.error;
+    self.list = function (payload, resolve, reject) {
+        reject = reject || window.{namespace}.log.error;
         var cfg = getDefaults();
         payload = clearEmpty(payload);
         cfg.type = 'POST';
@@ -81,37 +81,21 @@ var {nameAsClass}Client = function (options) {
     };
 
     /**
-    * Get contact detail
+    * Get details
     * @param {~lb}String{~rb} id
     * @param {~lb}Function{~rb} success callback
     * @param {~lb}Function{~rb} error callback
     * @method detail
     */
     self.detail = function (id, resolve, reject) {
-        reject = reject || window.hiso.log.error;
+        reject = reject || window.{namespace}.log.error;
         var cfg = getDefaults();
         cfg.type = 'GET';
         cfg.success = resolve;
         cfg.error = reject;
         $.ajax(['{endpoint}{name}/detail/', id, '?client_id=', self.options.id].join(''), cfg);
     };
-
-    /**
-    * Get suggesstions
-    * @param {~lb}String{~rb} text
-    * @param {~lb}Function{~rb} success callback
-    * @param {~lb}Function{~rb} error callback
-    * @method suggestion
-    */
-    self.suggestion = function (text, resolve, reject) {
-        reject = reject || window.hiso.log.error;
-        var cfg = getDefaults();
-        cfg.type = 'GET';
-        cfg.success = resolve;
-        cfg.error = reject;
-        $.ajax(['{endpoint}{name}/suggestions?client_id=', self.options.id, '&text=', text.toLowerCase()].join(''), cfg);
-    };
 };
 
-window.hiso = window.hiso || {};
-window.hiso.{nameAsClass}Client = {nameAsClass}Client;
+window.{namespace} = window.{namespace} || {};
+window.{namespace}.{nameAsClass}Client = {nameAsClass}Client;

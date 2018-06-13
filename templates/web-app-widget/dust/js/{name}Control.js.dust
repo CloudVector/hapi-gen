@@ -1,29 +1,15 @@
-/*global window, hiso, dust, $ */
+/*global window, {namespace}, dust, $ */
 "use strict";
 
 /**
-* Page with navigation and pagination
+* Client side Control to handle events and local logic
 * @class {nameAsClass}Control
 * @param {~lb}Object{~rb} options
 * @constructor
 */
 var {nameAsClass}Control = function (options) {
     var self = this,
-    _timer = 0,
-    _events = {
-        click: [],
-        search: []
-    },
-    _dom = {},
-    _search = '',
-    _mode = 'search',
-    initNavigation,
-    initPagination,
-    searchChanged,
-    menuClicked,
-    pageChanged,
-    createUrl,
-    updateUrl,
+    _dom = {~lb}{~rb},
     detailClicked,
     getData,
     bind;
@@ -32,11 +18,11 @@ var {nameAsClass}Control = function (options) {
     * Options
     * @property options
     */
-    self.options = options || {};
+    self.options = options || {~lb}{~rb};
     // Set defaults
     self.options.container = self.options.container || '#{name}';
     self.options.container = typeof self.options.container === 'string' ? $(self.options.container) : self.options.container;
-    self.options.template = self.options.template || '{name}-page.dust';
+    self.options.template = self.options.template || '{name}.dust';
 
     /**
     * {nameAsClass} Model
@@ -47,65 +33,15 @@ var {nameAsClass}Control = function (options) {
     /* Client component */
     self.client = new {nameAsClass}Client();
 
-    /* Subcomponents */
-    self.navigation = null;
-    self.pagination = null;
-
     /* Binding events to DOM elements */
-    bind = function () {
+    bind = function (cb) {
         // Create and cache DOM elements
         _dom.body = $('body');
         _dom.items = $('#{name}-items');
         _dom.items.on('click', '.js-detail', detailClicked);
-    };
-
-    /* Initialize navigation */
-    initNavigation = function (cb) {
-        if (self.options.navigation) {
-            self.navigation = new hiso.NavigationControl(self.options.navigation);
-            self.navigation.init(function () {
-                // Wire up events
-                self.navigation.onSearch(searchChanged);
-                if (typeof cb === 'function') {
-                    cb();
-                }
-            });
-        } else if (typeof cb === 'function') {
+        if (typeof cb === 'function') {
             cb();
         }
-    };
-
-    /* Initialize contacts */
-    initPagination = function (cb) {
-        // Add client as option
-        if (self.options.pagination) {
-            self.pagination = new hiso.PaginationControl(self.options.pagination);
-            self.pagination.init(function () {
-                // Wire up events
-                self.pagination.onClick(pageChanged);
-                if (typeof cb === 'function') {
-                    cb();
-                }
-            });
-        } else if (typeof cb === 'function') {
-            cb();
-        }
-    };
-
-    /* Search changed */
-    searchChanged = function (e, text) {
-        _search = text.trim();
-        getData(updateUrl);
-    };
-
-    /* Menu clicked in navigation */
-    menuClicked = function (e, value) {
-        console.log('CLICKED: ', value);
-    };
-
-    /* Page changed */
-    pageChanged = function (e, page) {
-        getData(updateUrl);
     };
 
     /* When detail clicked */
@@ -113,69 +49,6 @@ var {nameAsClass}Control = function (options) {
         var id = $(this).data('id');
         console.log('DETAIL:', id);
     }
-
-    /* Create url */
-    createUrl = function () {
-        var loc = window.location;
-        var result = [
-            loc.protocol, '//', 
-            loc.hostname,
-            loc.port === '' ? '' : ':', 
-            loc.port
-        ];
-        result.push('/' + _mode);
-        if (_mode === 'search') {
-            var m = self.pagination.model;
-            result.push(['?page=' + m.page, '&size=', m.size, '&sort=', m.sort].join(''));
-            if (_search !== '') {
-                result.push('&search=', _search);
-            }
-        } else {
-            
-        }
-        return result.join('');
-    };
-
-    /* Update the url if possible */
-    updateUrl = function () {
-        // Add to the page
-        if (typeof window.history !== 'undefined' && window.history.pushState) {
-            var oldUrl = window.location.href,
-            newUrl = createUrl();
-            // Push to history only if not the same
-            if (newUrl !== oldUrl) {
-                window.history.pushState({ path: newUrl },'', newUrl);
-            }
-        }
-    };
-
-    /* Requests data from server side */
-    getData = function (cb) {
-        var request = {
-            page: self.pagination.model.page,
-            size: self.pagination.model.size,
-            sort: self.pagination.model.sort
-        };
-        if (_search !== '') {
-            request.search = _search;
-        }
-        // Execute search
-        self.client.search(request, function (response) {
-            if (response && response.items) {
-                self.model = new SearchModel(response);
-                dust.render('search-items.dust', self.model, function (err, out) {
-                    if (err) {
-                        window.hiso.log.error(err);
-                    } else {
-                        _dom.items.html('').append(out);
-                    }
-                    if (typeof cb === 'function') {
-                        cb();
-                    }
-                });
-            }
-        });
-    };
 
     /**
     * Rendering HTML content for control
@@ -201,19 +74,10 @@ var {nameAsClass}Control = function (options) {
     self.init = function (cb) {
         // Init all components
         var initComponents = function () {
-            bind();
-            initNavigation(function () {
-                initPagination(function () {
-                    updateUrl('/{name}');
-                    if (typeof cb === 'function') {
-                        cb();
-                    }
-                });
-            });
+            bind(cb);
         };
-
         // Create model
-        self.model = (self.options.model) ? self.options.model : new hiso.{nameAsClass}Model(self.options);
+        self.model = (self.options.model) ? self.options.model : new {namespace}.{nameAsClass}Model(self.options);
         // Check if navigation rendered on server side if not render it!
         if (self.options.container.html() === '') {
             self.render(initComponents);
@@ -223,5 +87,5 @@ var {nameAsClass}Control = function (options) {
     };
 };
 
-window.hiso = window.hiso || {};
-window.hiso.{nameAsClass}Control = {nameAsClass}Control;
+window.{namespace} = window.{namespace} || {};
+window.{namespace}.{nameAsClass}Control = {nameAsClass}Control;

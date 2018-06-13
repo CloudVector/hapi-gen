@@ -1,0 +1,25 @@
+{~lb}>"layout.dust"/{~rb}
+
+{~lb}<body{~rb}
+        <section id="navigation">
+            {~lb}>"navigation.dust":navigation/{~rb}
+        </section>
+        <section id="search" class="portfolio-type1 w-text bg-deepgrey">
+            <div class="container">
+                <div id="search-items">
+                    {~lb}>"search-items.dust"/{~rb}
+                </div>
+            </div>
+        </section>
+    </div>
+{~lb}/body{~rb}
+
+{~lb}<bottom{~rb}
+<script>
+    window.{namespace} = window.{namespace} || {~lb}{~rb};
+    window.{namespace}.search = new window.{namespace}.SearchControl({~lb}.|s|js{~rb});
+    $(document).ready(function () {
+        window.{namespace}.search.init();
+    });
+</script>
+{~lb}/bottom{~rb}

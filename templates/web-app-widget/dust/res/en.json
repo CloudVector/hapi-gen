@@ -1,32 +1,3 @@
 {
-    "list": {
-        "title": "People",
-        "sortBy": "Sort By",
-        "sorts": {
-            "name-az": "A-Z",
-            "name-za": "Z-A"
-        },
-        "sort": "name-az",
-        "add": "Add Contact"
-    },
-    "detail": {
-        "edit": "Edit"
-    },
-    "fields": {
-        "firstName": "First Name",
-        "lastName": "Last Name",
-        "maritalStatus": "Marital Status",
-        "email": "Email",
-        "phone": "Phone",
-        "company": "Company",
-        "department": "Department",
-        "income": "Income",
-        "ssn": "Social Security Number",
-        "country": "Country",
-        "region": "Region",
-        "postalCode": "Postal Code",
-        "city": "City",
-        "address": "Address",
-        "note": "Note"
-    }
+    "demo": "This is your static text"
 }

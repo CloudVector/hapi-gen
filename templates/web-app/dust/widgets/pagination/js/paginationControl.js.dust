@@ -1,4 +1,4 @@
-/*global window, hiso, dust, $ */
+/*global window, {namespace}, dust, $ */
 "use strict";
 
 /**
@@ -6,13 +6,13 @@
 *
 * @class PaginationControl
 * @constructor
-* @param {object} options
-* @param {function} cb
+* @param {~lb}object{~rb} options
+* @param {~lb}function{~rb} cb
 */
 
 var PaginationControl = function (options) {
     var self = this,
-    _dom = {},
+    _dom = {~lb}{~rb},
     _events = {
         click: []
     },
@@ -24,7 +24,7 @@ var PaginationControl = function (options) {
     * Options
     * @property options
     */
-    self.options = options || {};
+    self.options = options || {~lb}{~rb};
     self.options.container = self.options.container || '#pagination';
     self.options.container = typeof self.options.container === 'string' ? $(self.options.container) : self.options.container;
     self.options.template = self.options.template || 'pagination.dust';
@@ -64,7 +64,7 @@ var PaginationControl = function (options) {
             } else if (role === 'last') {
                 self.model.last();
             }
-            hiso.tools.callEvents(this, _events.click, e, self.model.page);
+            {namespace}.tools.callEvents(this, _events.click, e, self.model.page);
         }
     };
 
@@ -83,7 +83,7 @@ var PaginationControl = function (options) {
     * Updates pagination information based on model values
     *
     * @method update
-    * @return {undefined}
+    * @return {~lb}undefined{~rb}
     */
     self.update = function update () {
         var $control,
@@ -131,8 +131,8 @@ var PaginationControl = function (options) {
     /**
     * Rendering HTML content for control
     * @method render
-    * @param {function} callback
-    * @return {Undefined}
+    * @param {~lb}function{~rb} callback
+    * @return {~lb}Undefined{~rb}
     */
     self.render = function render (cb) {
         dust.render(self.options.template, {}, function (err, out) {
@@ -146,13 +146,13 @@ var PaginationControl = function (options) {
     /**
     * Initialize component
     * @method init
-    * @param {function} callback
-    * @return {Undefined}
+    * @param {~lb}function{~rb} callback
+    * @return {~lb}Undefined{~rb}
     */
     self.init = function init (cb) {
         // Create model
         self.options.search = self.options.search === undefined ? '' : self.options.search;
-        self.model = (self.options.model) ? self.options.model : new hiso.PaginationModel(self.options);
+        self.model = (self.options.model) ? self.options.model : new {namespace}.PaginationModel(self.options);
         // Add to watch
         self.model._watch(self.update);
         // Check if template need to be rendered
@@ -184,12 +184,12 @@ var PaginationControl = function (options) {
     * Event occurs when pagination item is clicked
     *
     * @event onClick
-    * @param {function} event handler callback
+    * @param {~lb}function{~rb} event handler callback
     */
     self.onClick = function onClick (cb) {
-        return hiso.tools.addToEvents(_events.click, cb);
+        return {namespace}.tools.addToEvents(_events.click, cb);
     };
 };
 
-window.hiso = window.hiso || {};
-window.hiso.PaginationControl = PaginationControl;
+window.{namespace} = window.{namespace} || {~lb}{~rb};
+window.{namespace}.PaginationControl = PaginationControl;

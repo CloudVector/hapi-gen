@@ -8,8 +8,7 @@
     },
     "view": {
         "client": [
-            "view/{name}-item.dust",
-            "view/{name}-items.dust"
+            "view/{name}.dust"
         ]
     }
 }

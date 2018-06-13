@@ -1,0 +1,26 @@
+/*global window */
+"use strict";
+
+var isNode = (typeof module !== 'undefined' && typeof module.exports !== 'undefined');
+var tools = isNode ? require('../../../src/js/tools.js') : window.{namespace}.tools;
+
+/**
+* Navigation Model
+* @class NavigationModel
+* @constructor
+*/
+var NavigationModel = function (data) {
+    var self = this;
+    data = data || {~lb}{~rb};
+    // Assign data
+    tools.assign(self, data);
+    // Load resource
+    tools.property(self, 'res', tools.resources('navigation', data.language));
+};
+
+if (isNode) {
+    module.exports = NavigationModel;
+} else {
+    window.{namespace} = window.{namespace} || {~lb}{~rb};
+    window.{namespace}.NavigationModel = NavigationModel;
+}

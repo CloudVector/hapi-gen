@@ -2,7 +2,7 @@
 "use strict";
 
 var isNode = (typeof module !== 'undefined' && typeof module.exports !== 'undefined');
-var tools = isNode ? require('../../../src/js/tools.js') : window.hiso.tools;
+var tools = isNode ? require('../../../src/js/tools.js') : window.{namespace}.tools;
 
 /**
 * Single item model
@@ -11,8 +11,9 @@ var tools = isNode ? require('../../../src/js/tools.js') : window.hiso.tools;
 */
 var SearchItemModel = function (data) {
     var self = this;
+    data = data || {~lb}{~rb};
     // Assign property
-    tools.property(self, 'res', tools.resources('search', 'list'));
+    tools.property(self, 'res', tools.resources('search', data.language, 'list'));
     tools.assign(self, data);
 };
 
@@ -96,6 +97,6 @@ SearchItemModel.prototype.comment = function () {
 if (isNode) {
     module.exports = SearchItemModel;
 } else {
-    window.hiso = window.hiso || {};
-    window.hiso.SearchItemModel = SearchItemModel;
+    window.{namespace} = window.{namespace} || {};
+    window.{namespace}.SearchItemModel = SearchItemModel;
 }

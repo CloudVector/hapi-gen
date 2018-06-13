@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Prototype isomorphic application built on hapi framework">
+    <meta name="keywords" content="prototype, isomorphic, javascript, hapi, framework, web">
+    <meta name="author" content="Tamara Dukai">
+    <!-- Favicon -->
+    <link rel="icon" href="{~lb}host{~rb}/images/favicon.ico?v={~lb}clientVersion{~rb}">
+    <!-- Site Title -->
+    <title>Isomorphic example</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{~lb}host{~rb}/styles/vendor-{~lb}vendorVersion{~rb}.min.css">
+    <link rel="stylesheet" type="text/css" href="{~lb}host{~rb}/styles/client-{~lb}clientVersion{~rb}.min.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,800" rel="stylesheet">
+    <script src="{~lb}host{~rb}/scripts/vendor-{~lb}vendorVersion{~rb}.min.js"></script>
+    {~lb}+header/{~rb}
+</head>
+
+<body class="has-fixed-menu">
+    {~lb}+body/{~rb}
+    {~lb}?debug{~rb}
+        <script src="{~lb}host{~rb}/scripts/client-{~lb}clientVersion{~rb}.js"></script>
+        <script>
+            window.{namespace} = window.{namespace} || {};
+            window.{namespace}.host = '{~lb}host{~rb}';
+            window.{namespace}.helper = '{~lb}helper{~rb}';
+        </script>
+    {~lb}:else{~rb}
+        <script src="{~lb}host{~rb}/scripts/client-{~lb}clientVersion{~rb}.min.js"></script>
+    {~lb}/debug{~rb}
+    <script src="{~lb}host{~rb}/scripts/views-{~lb}clientVersion{~rb}.min.js"></script>
+
+    {~lb}+bottom/{~rb}
+</body>
+</html>

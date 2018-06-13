@@ -80,7 +80,7 @@ class Repository extends RepositoryBase {
     /**
     * Returns multiple contacts based on some filters and sorting
     *
-    * @method getList
+    * @method list
     * @param {~lb}Object{~rb} params - search and paging parameters
     *
     * @return {~lb}Object{~rb} list of search results

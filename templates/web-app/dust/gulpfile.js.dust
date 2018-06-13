@@ -3,7 +3,7 @@
 const gulp = require('gulp');
 const fs = require('fs');
 const path = require('path');
-const plugins = require('gulp-load-plugins')({ camelize: true });
+const plugins = require('gulp-load-plugins')({~lb} camelize: true });
 const pkg = require('./package.json');
 let loadBundle = require('./lib/bundles.js');
 let _bundle = null;
@@ -116,14 +116,14 @@ gulp.task('resources', function (done) {
     const template = `/*global window */
 'use strict';
 
-var resources = ${JSON.stringify(bundle.res, null, 4)};
+var resources = ${~lb}JSON.stringify(bundle.res, null, 4)};
 
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = resources;
 } else {
-    window.hiso = window.hiso || {};
-    window.hiso.language = 'en';
-    window.hiso.resources = resources;
+    window.{namespace} = window.{namespace} || {~lb}{~rb};
+    window.{namespace}.language = 'en';
+    window.{namespace}.resources = resources;
 }`;
     // Write to temp folder
     fs.writeFile(path.join(__dirname, 'lib/resources.js'), template, (err) => {
@@ -193,8 +193,8 @@ gulp.task('bundle-view', function () {
         // Combine all views for server side
         gulp.src(bundle.view.server)
             .pipe(plugins.expectFile(bundle.view.server))
-            .pipe(plugins.replace('{vendorVersion}', pkg.vendorVersion)) // Replace tokens with real version numbers
-            .pipe(plugins.replace('{clientVersion}', pkg.version))
+            .pipe(plugins.replace('{~lb}vendorVersion{~rb}', pkg.vendorVersion)) // Replace tokens with real version numbers
+            .pipe(plugins.replace('{~lb}clientVersion{~rb}', pkg.version))
             .pipe(plugins.dust({
                 name: getViewName,
                 preserveWhitespace: false
@@ -224,7 +224,7 @@ gulp.task('bundle-view', function () {
 gulp.task('watch', ['bundle'], function () {
     let bundle = getBundle();
     // Start dev server
-    plugins.developServer.listen({ path: 'index.js' });
+    plugins.developServer.listen({~lb} path: 'index.js' {~rb});
 
     gulp.watch(bundle.js.lint, function () {
         gulp.start(['lint', 'test', 'bundle-js'], function () {

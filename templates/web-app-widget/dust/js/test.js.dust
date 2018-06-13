@@ -1,13 +1,13 @@
-/*global hiso, window, document, dust, $ */
+/*global window, {namespace}, document, dust, $ */
 "use strict";
 
 $(document).ready(function () {
     // Set the widget name for testing
-    window.hiso = window.hiso || {};
-    window.hiso.widget = '{name}';
+    window.{namespace} = window.{namespace} || {};
+    window.{namespace}.widget = '{name}';
     $('#render').on('click', function () {
-        var model = new hiso.{nameAsClass}Model();
-        var control = new hiso.{nameAsClass}Control({~lb} container: '#widget', model: model {~rb});
+        var model = new {namespace}.{nameAsClass}Model();
+        var control = new {namespace}.{nameAsClass}Control({~lb} container: '#widget', model: model {~rb});
         control.init();
         control.onClick(function (e, args) {
             e.preventDefault();
@@ -18,7 +18,7 @@ $(document).ready(function () {
             $('#message').html(['Search for: <b>"', args.value === '' ? 'Nothing!' : args.value, '"</b>'].join(''));
         });
         // Set the control and model
-        window.hiso.control = control;
-        window.hiso.model = model;
+        window.{namespace}.control = control;
+        window.{namespace}.model = model;
     }).trigger('click');
 });

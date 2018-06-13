@@ -1,10 +1,10 @@
-/*global window, hiso, dust, $ */
+/*global window, {namespace}, dust, $ */
 "use strict";
 
 /**
 * Search page with navigation and pagination
 * @class SearchControl
-* @param {object} options
+* @param {~lb}object{~rb} options
 * @constructor
 */
 var SearchControl = function (options) {
@@ -36,12 +36,12 @@ var SearchControl = function (options) {
 
     /**
     * Search Model
-    * @property {SearchModel} model
+    * @property {~lb}SearchModel{~rb} model
     */
     self.model = null;
 
     /* Client component */
-    self.client = new hiso.SearchClient();
+    self.client = new {namespace}.SearchClient();
 
     /* Subcomponents */
     self.navigation = null;
@@ -58,7 +58,7 @@ var SearchControl = function (options) {
     /* Initialize navigation */
     initNavigation = function (cb) {
         if (self.options.navigation) {
-            self.navigation = new hiso.NavigationControl(self.options.navigation);
+            self.navigation = new {namespace}.NavigationControl(self.options.navigation);
             self.navigation.init(function () {
                 // Wire up events
                 self.navigation.onSearch(searchChanged);
@@ -75,7 +75,7 @@ var SearchControl = function (options) {
     initPagination = function (cb) {
         // Add client as option
         if (self.options.pagination) {
-            self.pagination = new hiso.PaginationControl(self.options.pagination);
+            self.pagination = new {namespace}.PaginationControl(self.options.pagination);
             self.pagination.init(function () {
                 // Wire up events
                 self.pagination.onClick(pageChanged);
@@ -133,7 +133,7 @@ var SearchControl = function (options) {
             newUrl = createUrl();
             // Push to history only if not the same
             if (newUrl !== oldUrl) {
-                window.history.pushState({ path: newUrl },'', newUrl);
+                window.history.pushState({~lb} path: newUrl {~rb},'', newUrl);
             }
         }
     };
@@ -151,10 +151,10 @@ var SearchControl = function (options) {
         // Execute search
         self.client.search(request, function (response) {
             if (response && response.items) {
-                self.model = new hiso.SearchModel(response);
+                self.model = new {namespace}.SearchModel(response);
                 dust.render('search-items.dust', self.model, function (err, out) {
                     if (err) {
-                        window.hiso.log.error(err);
+                        window.{namespace}.log.error(err);
                     } else {
                         _dom.items.html('').append(out);
                     }
@@ -169,8 +169,8 @@ var SearchControl = function (options) {
     /**
     * Rendering HTML content for control
     * @method render
-    * @param {function} callback
-    * @return {Undefined}
+    * @param {~lb}function{~rb} callback
+    * @return {~lb}Undefined{~rb}
     */
     self.render = function (cb) {
         dust.render(self.options.template, self.model, function (err, out) {
@@ -184,8 +184,8 @@ var SearchControl = function (options) {
     /**
     * Initialize component
     * @method init
-    * @param {function} callback
-    * @return {Undefined}
+    * @param {~lb}function{~rb} callback
+    * @return {~lb}Undefined{~rb}
     */
     self.init = function (cb) {
         // Init all components
@@ -202,7 +202,7 @@ var SearchControl = function (options) {
         };
 
         // Create model
-        self.model = (self.options.model) ? self.options.model : new hiso.SearchModel(self.options);
+        self.model = (self.options.model) ? self.options.model : new {namespace}.SearchModel(self.options);
         // Check if navigation rendered on server side if not render it!
         if (self.options.container.html() === '') {
             self.render(initComponents);
@@ -212,5 +212,5 @@ var SearchControl = function (options) {
     };
 };
 
-window.hiso = window.hiso || {};
-window.hiso.SearchControl = SearchControl;
+window.{namespace} = window.{namespace} || {~lb}{~rb};
+window.{namespace}.SearchControl = SearchControl;

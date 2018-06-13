@@ -2,7 +2,7 @@
 "use strict";
 
 var isNode = (typeof module !== 'undefined' && typeof module.exports !== 'undefined');
-var tools = isNode ? require('../../../src/js/tools.js') : window.hiso.tools;
+var tools = isNode ? require('../../../src/js/tools.js') : window.{namespace}.tools;
 
 /**
 * {name} Model
@@ -20,6 +20,6 @@ var {nameAsClass}Model = function (data) {
 if (isNode) {
     module.exports = {nameAsClass}Model;
 } else {
-    window.hiso = window.hiso || {};
-    window.hiso.{nameAsClass}Model = {nameAsClass}Model;
+    window.{namespace} = window.{namespace} || {};
+    window.{namespace}.{nameAsClass}Model = {nameAsClass}Model;
 }

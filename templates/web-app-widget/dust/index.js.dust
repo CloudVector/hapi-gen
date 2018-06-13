@@ -15,12 +15,7 @@ module.exports.plugin = {
             method: 'GET',
             handler: async (request, h) => {
                 try {
-                    let promises = [];
-                    promises.push(facade.{nameAsVariable}.list(request.query));
-                    promises.push(facade.navigation.getModel());
-                    let res = await Promise.all(promises);
-                    let model = res[0];
-                    model.navigation = res[1];
+                    let model = await facade.{nameAsVariable}.list(request.query);
                     return h.renderView('{name}-page', model);
                 } catch (err) {
                     return Boom.boomify(err, {~lb} statusCode: 400 {~rb});

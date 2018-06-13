@@ -16,7 +16,7 @@ var SearchClient = function (options) {
     * Options
     * @property options
     */
-    self.options = options || {};
+    self.options = options || {~lb}{~rb};
     self.options.id = self.options.id || 'hapi-iso'; // Default client id
 
     /* Creates default AJAX settings */
@@ -64,13 +64,13 @@ var SearchClient = function (options) {
 
     /**
     * Get contact list
-    * @param {object} payload
-    * @param {function} resolve (success) callback
-    * @param {function} reject (error) callback
+    * @param {~lb}object{~rb} payload
+    * @param {~lb}function{~rb} resolve (success) callback
+    * @param {~lb}function{~rb} reject (error) callback
     * @method search
     */
     self.search = function (payload, resolve, reject) {
-        reject = reject || window.hiso.log.error;
+        reject = reject || window.{namespace}.log.error;
         var cfg = getDefaults();
         payload = clearEmpty(payload);
         cfg.type = 'POST';
@@ -82,13 +82,13 @@ var SearchClient = function (options) {
 
     /**
     * Get contact detail
-    * @param {string} id
-    * @param {function} success callback
-    * @param {function} error callback
+    * @param {~lb}string{~rb} id
+    * @param {~lb}function{~rb} success callback
+    * @param {~lb}function{~rb} error callback
     * @method detail
     */
     self.detail = function (id, resolve, reject) {
-        reject = reject || window.hiso.log.error;
+        reject = reject || window.{namespace}.log.error;
         var cfg = getDefaults();
         cfg.type = 'GET';
         cfg.success = resolve;
@@ -98,13 +98,13 @@ var SearchClient = function (options) {
 
     /**
     * Get suggesstions
-    * @param {string} text
-    * @param {function} success callback
-    * @param {function} error callback
+    * @param {~lb}string{~rb} text
+    * @param {~lb}function{~rb} success callback
+    * @param {~lb}function{~rb} error callback
     * @method suggestion
     */
     self.suggestion = function (text, resolve, reject) {
-        reject = reject || window.hiso.log.error;
+        reject = reject || window.{namespace}.log.error;
         var cfg = getDefaults();
         cfg.type = 'GET';
         cfg.success = resolve;
@@ -113,5 +113,5 @@ var SearchClient = function (options) {
     };
 };
 
-window.hiso = window.hiso || {};
-window.hiso.SearchClient = SearchClient;
+window.{namespace} = window.{namespace} || {~lb}{~rb};
+window.{namespace}.SearchClient = SearchClient;

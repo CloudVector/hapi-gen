@@ -11,7 +11,7 @@ var bimo = isNode ? require('bimo') : window.bimo;
 */
 var PaginationModel = function (data) {
     // Set defaults
-    data = data || {};
+    data = data || {~lb}{~rb};
     data.page = data.page || 1;
     data.size = data.size || 10;
     data.total = data.total || 0;
@@ -25,8 +25,8 @@ PaginationModel.constructor = bimo.Model;
 /**
 * Check if value is empty 
 * @method isEmpty
-* @param {Any} value
-* @return {Boolean} true if value is undefined, null or empty string
+* @param {~lb}Any{~rb} value
+* @return {~lb}Boolean{~rb} true if value is undefined, null or empty string
 */
 PaginationModel.prototype.isEmpty = function (value) {
     return (value === undefined || value === null || value === '');
@@ -35,9 +35,9 @@ PaginationModel.prototype.isEmpty = function (value) {
 /**
 * Calculates page count 
 * @method getPageCount
-* @param {Number} total - total number of record available
-* @param {Number} size - page size
-* @return {Number} number of pages used in the pagination
+* @param {~lb}Number{~rb} total - total number of record available
+* @param {~lb}Number{~rb} size - page size
+* @return {~lb}Number{~rb} number of pages used in the pagination
 */
 PaginationModel.prototype.getPageCount = function (total, size) {
     var result = 0;
@@ -50,7 +50,7 @@ PaginationModel.prototype.getPageCount = function (total, size) {
 /**
 * Moves page to first 
 * @method first
-* @return {Undefined}
+* @return {~lb}Undefined{~rb}
 */
 PaginationModel.prototype.first = function () {
     this.page = 1;
@@ -59,7 +59,7 @@ PaginationModel.prototype.first = function () {
 /**
 * Moves page to next
 * @method next
-* @return {Undefined}
+* @return {~lb}Undefined{~rb}
 */
 PaginationModel.prototype.next = function () {
     if (this.page < this.count) {
@@ -70,7 +70,7 @@ PaginationModel.prototype.next = function () {
 /** 
 * Moves page to previous
 * @method prev
-* @return {Undefined}
+* @return {~lb}Undefined{~rb}
 */
 PaginationModel.prototype.prev = function () {
     if (this.page > 1) {
@@ -81,7 +81,7 @@ PaginationModel.prototype.prev = function () {
 /**
 * Moves page to last
 * @method last
-* @return {Undefined}
+* @return {~lb}Undefined{~rb}
 */
 PaginationModel.prototype.last = function () {
     this.page = this.count;
@@ -90,7 +90,7 @@ PaginationModel.prototype.last = function () {
 /*
 * Skip to selected page
 * @method go
-* @return {Undefined}
+* @return {~lb}Undefined{~rb}
 */
 PaginationModel.prototype.go = function (page) {
     page = parseInt(page, 10);
@@ -102,7 +102,7 @@ PaginationModel.prototype.go = function (page) {
 /*
 * Update multiple properties
 * @method update
-* @return {Undefined}
+* @return {~lb}Undefined{~rb}
 */
 PaginationModel.prototype.update = function (data) {
     this.page = data.page || this.page;
@@ -114,6 +114,6 @@ PaginationModel.prototype.update = function (data) {
 if (isNode) {
     module.exports = PaginationModel;
 } else {
-    window.hiso = window.hiso || {};
-    window.hiso.PaginationModel = PaginationModel;
+    window.{namespace} = window.{namespace} || {~lb}{~rb};
+    window.{namespace}.PaginationModel = PaginationModel;
 }

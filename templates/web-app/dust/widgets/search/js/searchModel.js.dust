@@ -2,8 +2,8 @@
 "use strict";
 
 var isNode = (typeof module !== 'undefined' && typeof module.exports !== 'undefined');
-var tools = isNode ? require('../../../src/js/tools.js') : window.hiso.tools;
-var SearchItemModel = isNode ? require('./searchItemModel.js') : window.hiso.SearchItemModel;
+var tools = isNode ? require('../../../src/js/tools.js') : window.{namespace}.tools;
+var SearchItemModel = isNode ? require('./searchItemModel.js') : window.{namespace}.SearchItemModel;
 
 /**
 * Navigation Model
@@ -12,10 +12,11 @@ var SearchItemModel = isNode ? require('./searchItemModel.js') : window.hiso.Sea
 */
 var SearchModel = function (data) {
     var self = this;
+    data = data || {~lb}{~rb};
     // Assign data
     tools.assign(self, data);
     // Load resources
-    tools.property(self, 'res', tools.resources('search'));
+    tools.property(self, 'res', tools.resources('search', data.language));
     // Create items
     if (data.items) {
         self.items = tools.model(data.items, SearchItemModel);
@@ -25,6 +26,6 @@ var SearchModel = function (data) {
 if (isNode) {
     module.exports = SearchModel;
 } else {
-    window.hiso = window.hiso || {};
-    window.hiso.SearchModel = SearchModel;
+    window.{namespace} = window.{namespace} || {~lb}{~rb};
+    window.{namespace}.SearchModel = SearchModel;
 }
