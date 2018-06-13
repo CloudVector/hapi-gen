@@ -2,6 +2,7 @@
 
 const path = require('path');
 const files = require('./files.js');
+const fs = require('fs');
 const WIDGETS_FOLDER = 'widgets';
 let bundle = require('../bundle.json');
 
@@ -52,11 +53,14 @@ module.exports = () => {
     list.forEach((folder) => {
         for (let lng in bundle.res) {
             if (bundle.res.hasOwnProperty(lng)) {
-                let resFile = path.join(__dirname, '/../', WIDGETS_FOLDER, folder, 'res', lng + '.json');
-                try {
-                    bundle.res[lng][folder] = require(resFile);
-                } catch (e) {
-                    console.log(['Resource does not exists: "', resFile].join(''));
+                let resDir = path.join(__dirname, '/../', WIDGETS_FOLDER, folder, 'res');
+                if (fs.existsSync(resDir)) {
+                    let resFile = path.join(resDir, lng + '.json');
+                    try {
+                        bundle.res[lng][folder] = require(resFile);
+                    } catch (e) {
+                        console.log(['Resource does not exists: "', resFile].join(''));
+                    }
                 }
             }
         }
