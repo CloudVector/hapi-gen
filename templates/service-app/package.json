@@ -40,11 +40,14 @@
   },
   "devDependencies": {
     "chai": "^4.x",
+    "chokidar": "^2.x",
     "gulp": "^3.x",
     "gulp-eslint": "^4.x",
+    "gulp-develop-server": "^0.x",
     "gulp-lab": "^1.x",
     "gulp-load-plugins": "^1.x",
     "gulp-util": "^3.x",
-    "lab": "^15.x"
+    "lab": "^15.x",
+    "run-sequence": "^2.x"
   }
 }

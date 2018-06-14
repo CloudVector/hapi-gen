@@ -3,6 +3,7 @@
 
 var isNode = (typeof module !== 'undefined' && typeof module.exports !== 'undefined');
 var RESOURCES = isNode ? require('../../lib/resources.js') : window.{namespace}.resources;
+var defaultLanguage = isNode ? require('config').language : window.{namespace}.language;
 // Create tools object
 var tools = {};
 
@@ -103,12 +104,23 @@ tools.defaults = function (obj, defaults) {
 * @return {~lb}object} property content added to context
 */
 tools.resources = function (node, language, section) {
-    language = language || 'en';
-    var value = RESOURCES[language][node];
-    if (typeof section === 'string') {
-        value = value[section];
+    language = language || defaultLanguage;
+    var result;
+    if (Array.isArray(node)) {
+        node.forEach(function (key) {
+            if (result) {
+                result[key] = RESOURCES[language][key];
+            } else {
+                result = RESOURCES[language][key] || {~lb}{~rb};
+            }
+        });
+    } else {
+        result = RESOURCES[language][node];
     }
-    return value;
+    if (typeof section === 'string') {
+        result = result[section];
+    }
+    return result;
 };
 
 /**

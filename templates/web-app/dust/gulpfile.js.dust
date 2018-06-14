@@ -1,10 +1,14 @@
 "use strict";
 
 const gulp = require('gulp');
+const runSequence = require('run-sequence').use(gulp);
+const chokidar = require('chokidar');
+const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
 const plugins = require('gulp-load-plugins')({~lb} camelize: true });
 const pkg = require('./package.json');
+const RUN_TASKS = ['lint', 'test', 'bundle-js', 'bundle-css', 'bundle-img', 'bundle-font', 'bundle-view'];
 let loadBundle = require('./lib/bundles.js');
 let _bundle = null;
 
@@ -223,42 +227,20 @@ gulp.task('bundle-view', function () {
 
 gulp.task('watch', ['bundle'], function () {
     let bundle = getBundle();
+    let watchList = _.union(bundle.js.lint, bundle.scss.client, bundle.css.client, bundle.view.server);
+    let counter = 1;
+    watchList.push('!lib/resources.js');
+    watchList.push('!src/css/compiled.css');
+
     // Start dev server
     plugins.developServer.listen({~lb} path: 'index.js' {~rb});
-
-    gulp.watch(bundle.js.lint, function () {
-        gulp.start(['lint', 'test', 'bundle-js'], function () {
+    // Start watching 
+    chokidar.watch(watchList).on('change', (path) => {
+        // Run the build
+        console.log(`File "${~lb}path{~rb}"" changed`);
+        runSequence(RUN_TASKS, () => {
             plugins.developServer.restart();
-        });
-    });
-
-    gulp.watch(bundle.scss.client, function () {
-        gulp.start(['bundle-css'], function () {
-            plugins.developServer.restart();
-        });
-    });
-
-    gulp.watch(bundle.css.client, function () {
-        gulp.start(['bundle-css'], function () {
-            plugins.developServer.restart();
-        });
-    });
-
-    gulp.watch(bundle.css.server, function () {
-        gulp.start(['bundle-css'], function () {
-            plugins.developServer.restart();
-        });
-    });
-
-    gulp.watch(bundle.view.server, function () {
-        gulp.start(['bundle-view'], function () {
-            plugins.developServer.restart();
-        });
-    });
-
-    return gulp.watch(bundle.view.client, function () {
-        gulp.start(['bundle-view'], function () {
-            plugins.developServer.restart();
+            console.log('===============================================> Counter: ', counter++);
         });
     });
 });
@@ -273,5 +255,5 @@ gulp.task('test', function () {
 });
 
 
-gulp.task('bundle', ['lint', 'test', 'bundle-js', 'bundle-css', 'bundle-img', 'bundle-font', 'bundle-view']);
+gulp.task('bundle', RUN_TASKS);
 gulp.task('default', ['bundle']);
