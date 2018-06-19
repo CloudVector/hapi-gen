@@ -10,7 +10,7 @@ module.exports.plugin = {
         // Routes setup
         server.route([
         {
-            path: '{endpoint}{name}',
+            path: '{endpoint}',
             method: 'GET',
             handler: async (request, h) => {
                 try {
@@ -30,7 +30,7 @@ module.exports.plugin = {
             }
         },
         {
-            path: '{endpoint}{name}/{~lb}type{~rb}',
+            path: '{endpoint}/{~lb}type{~rb}',
             method: 'POST',
             handler: async (request, h) => {
                 try {
@@ -51,7 +51,7 @@ module.exports.plugin = {
             }
         },
         {
-            path: '{endpoint}{name}/{~lb}id{~rb}',
+            path: '{endpoint}/{~lb}id{~rb}',
             method: 'GET',
             handler: async (request, h) => {
                 try {
@@ -71,7 +71,7 @@ module.exports.plugin = {
             }
         },
         {
-            path: '{endpoint}{name}/{~lb}id{~rb}',
+            path: '{endpoint}/{~lb}id{~rb}',
             method: 'DELETE',
             handler: async (request, h) => {
                 try {

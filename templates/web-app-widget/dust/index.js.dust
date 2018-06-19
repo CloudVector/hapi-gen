@@ -31,7 +31,7 @@ module.exports.plugin = {
             }
         },
         {
-            path: '{endpoint}{name}',
+            path: '{endpoint}',
             method: 'POST',
             handler: async (request, h) => {
                 try {
@@ -51,18 +51,6 @@ module.exports.plugin = {
                 },
                 tags: ['api', '{name}', 'people'],
                 description: 'People {name}'
-            }
-        },
-        {
-            path: '{endpoint}{name}/html',
-            method: 'GET',
-            handler: (request, h) => {
-                return h.renderView('{name}');
-            },
-            options: {
-                auth: false,
-                tags: ['{name}', 'html'],
-                description: 'HTML content for {name}'
             }
         }
     ]);
