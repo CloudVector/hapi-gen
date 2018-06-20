@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/cloudvector/service-app#readme",
   "dependencies": {
+    "bcrypt": "^2.x",
     "boom": "^7.x",
     "config": "^1.x",
     "elasticsearch": "^14.x",

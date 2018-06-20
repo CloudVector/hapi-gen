@@ -1,20 +1,46 @@
 "use strict";
 
 const Boom = require('boom');
-const validate = require('./validate.js');
+const valid = require('./validation.js');
 
 module.exports.plugin = {
     register: (server) => {
-        // Get repository 
+        // Get repository from stored facade object
         const repo = server.settings.app.facade.{nameAsVariable};
         // Routes setup
         server.route([
+        {
+            path: '{endpoint}/{~lb}id{~rb}',
+            method: 'GET',
+            handler: async (request, h) => {
+                try {
+                    return await repo.load(request.params.id);
+                } catch (err) {
+                    console.error(err);
+                    return Boom.boomify(err, {~lb} statusCode: 400 {~rb});
+                }
+            },
+            options: {
+                auth: false,
+                validate: {
+                    params: {
+                        id: valid.id
+                    },
+                    query: {
+                        client: valid.client,
+                        debug: valid.debug
+                    }
+                },
+                tags: ['api', '{name}'],
+                description: 'Get a single {name} entity'
+            }
+        },
         {
             path: '{endpoint}',
             method: 'GET',
             handler: async (request, h) => {
                 try {
-                    return await repo.list();
+                    return await repo.list(request.query);
                 } catch (err) {
                     console.error(err);
                     return Boom.boomify(err, {~lb} statusCode: 400 {~rb});
@@ -23,18 +49,18 @@ module.exports.plugin = {
             options: {
                 auth: false,
                 validate: {
-                    query: validate.list
+                    query: valid.list
                 },
                 tags: ['api', '{name}'],
-                description: 'List {name}'
+                description: 'List of {name} entities'
             }
         },
         {
-            path: '{endpoint}/{~lb}type{~rb}',
+            path: '{endpoint}',
             method: 'POST',
             handler: async (request, h) => {
                 try {
-                    return await repo.create(request.params.type, request.payload);
+                    return await repo.add(request.payload);
                 } catch (err) {
                     console.error(err);
                     return Boom.boomify(err, {~lb} statusCode: 400 {~rb});
@@ -43,19 +69,22 @@ module.exports.plugin = {
             options: {
                 auth: false,
                 validate: {
-                    params: validate.type,
-                    payload: validate.save
+                    payload: valid.add,
+                    query: {
+                        client: valid.client,
+                        debug: valid.debug
+                    }
                 },
                 tags: ['api', '{name}'],
-                description: 'Save {name}'
+                description: 'Create and save new {name} entity'
             }
         },
         {
-            path: '{endpoint}/{~lb}id{~rb}',
+            path: '{endpoint}',
             method: 'PUT',
             handler: async (request, h) => {
                 try {
-                    return await repo.update(request.params.id);
+                    return await repo.update(request.payload);
                 } catch (err) {
                     console.error(err);
                     return Boom.boomify(err, {~lb} statusCode: 400 {~rb});
@@ -64,10 +93,14 @@ module.exports.plugin = {
             options: {
                 auth: false,
                 validate: {
-                    params: validate.id
+                    payload: valid.update,
+                    query: {
+                        client: valid.client,
+                        debug: valid.debug
+                    }
                 },
                 tags: ['api', '{name}'],
-                description: 'Get a {name}'
+                description: 'Update and save existing {name} entity'
             }
         },
         {
@@ -84,10 +117,10 @@ module.exports.plugin = {
             options: {
                 auth: false,
                 validate: {
-                    params: validate.id
+                    params: valid.id
                 },
                 tags: ['api', '{name}'],
-                description: 'Delete a {name}'
+                description: 'Delete a single {name} entity'
             }
         }
     ]);

@@ -1,16 +1,6 @@
 'use strict';
 
 const RepositoryBase = require('../../lib/repository-base.js');
-const internals = {};
-
-/* Calculates page offset */
-internals.skip = (page, size) => {
-    var result = 0;
-    if (page > 1) {
-        result = (page -1) * size;
-    }
-    return result;
-};
 
 /*
 * Data operation component
@@ -28,62 +18,50 @@ class Repository extends RepositoryBase {
     }
 
     /*
-    * Save 
-    * @method save
-    * @param {String} type 
-    * @param {Object} payload
-    * @return {Object} with success boolean flag set for operation result
+    * Get a single entity
+    * @method load
+    * @param {string} id
+    * @return {Object} result
     */
-    save (type, payload) {
-        let result = { success: true };
+    load (id) {
+        let result = {}; // read entity here
         return result;
     }
 
     /*
-    * Returns the list (filtered)
-    * @method list 
-    * @param {Object} search parameters
-    * @return {Object} result object
+    * Get a list of entities
+    * @method list
+    * @param {Object} params
+    * @return {Object} result
     */
-    list (search) {
-        let result = {
-            page: search.page,
-            size: search.size,
-            sort: search.sort,
-            count: 0,
-            total: 0,
-            items: []
-        };
-        let query = {};
-        let options = {};
+    list (params) {
+        let result = {}; // Load list of entities here
+    }
 
-        if (search.name) {
-            query.name = search.name;
-        }
-        if (search.page && search.limit) {
-            options.limit = search.limit;
-            options.skip = internals.skip(search.page, search.size);
-        }
-
-        // Add sort, no limit for this task
-        options.sort = search.sort;
-        // Execute search
+    /*
+    * Save entity
+    * @method add
+    * @param {Object} payload (entity or entities)
+    * @return {Object} result
+    */
+    add (payload) {
+        let result = {}; // create entity here and save it
         return result;
     }
 
     /*
-    * Return a single item
-    * @method find
-    * @param {String} id 
-    * @return {Object} JSON document
+    * Update entity
+    * @method update
+    * @param {Object} payload (entity or entities)
+    * @return {Object} result
     */
-    find (id) {
-        let result = {};
+    update (payload) {
+        let result = {}; // create entity here and save it
         return result;
     }
 
     /*
-    * Remove a single item
+    * Remove a single entity
     * @method remove
     * @param {String} id
     * @return {Object} with success boolean flag set for operation result

@@ -1,7 +1,7 @@
 "use strict";
 
 const Boom = require('boom');
-const validate = require('./validate.js');
+const valid = require('./validation.js');
 
 module.exports.plugin = {
     register: (server) => {
@@ -23,7 +23,7 @@ module.exports.plugin = {
             options: {
                 auth: false,
                 validate: {
-                    query: validate.list
+                    query: valid.list
                 },
                 tags: ['api', 'sample'],
                 description: 'List sample'
@@ -43,8 +43,8 @@ module.exports.plugin = {
             options: {
                 auth: false,
                 validate: {
-                    params: validate.type,
-                    payload: validate.save
+                    params: valid.type,
+                    payload: valid.add
                 },
                 tags: ['api', 'sample'],
                 description: 'Save sample'
@@ -64,7 +64,7 @@ module.exports.plugin = {
             options: {
                 auth: false,
                 validate: {
-                    params: validate.id
+                    params: valid.id
                 },
                 tags: ['api', 'sample'],
                 description: 'Get a sample'
@@ -84,7 +84,7 @@ module.exports.plugin = {
             options: {
                 auth: false,
                 validate: {
-                    params: validate.id
+                    params: valid.id
                 },
                 tags: ['api', 'sample'],
                 description: 'Delete a sample'
