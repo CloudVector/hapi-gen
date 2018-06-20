@@ -34,7 +34,7 @@ module.exports.plugin = {
             method: 'POST',
             handler: async (request, h) => {
                 try {
-                    return await repo.save(request.params.type, request.payload);
+                    return await repo.create(request.params.type, request.payload);
                 } catch (err) {
                     console.error(err);
                     return Boom.boomify(err, {~lb} statusCode: 400 {~rb});
@@ -52,10 +52,10 @@ module.exports.plugin = {
         },
         {
             path: '{endpoint}/{~lb}id{~rb}',
-            method: 'GET',
+            method: 'PUT',
             handler: async (request, h) => {
                 try {
-                    return await repo.find(request.params.id);
+                    return await repo.update(request.params.id);
                 } catch (err) {
                     console.error(err);
                     return Boom.boomify(err, {~lb} statusCode: 400 {~rb});
