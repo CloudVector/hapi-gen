@@ -1,6 +1,6 @@
 {
   "name": "hapi-gen",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Generator for HAPI based projects",
   "main": "index.js",
   "bin": {
