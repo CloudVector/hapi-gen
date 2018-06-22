@@ -16,7 +16,6 @@ module.exports.plugin = {
                 try {
                     return await repo.list();
                 } catch (err) {
-                    console.error(err);
                     return Boom.boomify(err, { statusCode: 400 });
                 }
             },
@@ -36,7 +35,6 @@ module.exports.plugin = {
                 try {
                     return await repo.save(request.params.type, request.payload);
                 } catch (err) {
-                    console.error(err);
                     return Boom.boomify(err, { statusCode: 400 });
                 }
             },
@@ -57,7 +55,6 @@ module.exports.plugin = {
                 try {
                     return await repo.find(request.params.id);
                 } catch (err) {
-                    console.error(err);
                     return Boom.boomify(err, { statusCode: 400 });
                 }
             },
@@ -77,7 +74,6 @@ module.exports.plugin = {
                 try {
                     return await repo.remove(request.params.id);
                 } catch (err) {
-                    console.error(err);
                     return Boom.boomify(err, { statusCode: 400 });
                 }
             },

@@ -5,6 +5,7 @@ process.env.PORT = process.env.PORT || 3000;
 process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
 const Hapi = require('hapi');
+const Boom = require('boom');
 const plugins = require('./plugins.js');
 const loadSettings = require('./settings.js');
 
@@ -18,7 +19,22 @@ let dbmodule = null;
 // Primary server
 const server = Hapi.server({
     port: port,
-    host: host
+    host: host,
+    routes: {
+        validate: {
+            failAction: async (request, h, err) => {
+                if (process.env.NODE_ENV === 'production') {
+                    // In prod, log a limited error message and throw the default Bad Request error.
+                    console.error('ValidationError:', err.message); // Better to use an actual logger here.
+                    throw Boom.badRequest(`Invalid request payload input`);
+                } else {
+                    // During development, log and respond with the full error.
+                    console.error(err);
+                    throw err;
+                }
+            }
+        }
+    }
 });
 
 // Initialize 

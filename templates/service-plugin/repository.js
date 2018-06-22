@@ -67,7 +67,7 @@ class Repository extends RepositoryBase {
     * @return {Object} with success boolean flag set for operation result
     */
     remove (id) {
-        let result = { success: true };
+        let result = { success: true }; // delete here
         return result;
     }
 }

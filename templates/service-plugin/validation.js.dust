@@ -1,10 +1,10 @@
 'use strict';
 
-const joi = require('joi');
-const schemas = require('./../../lib/validation.js'); // Get generic validations from lib folder
+const joi = require('./../../lib/joi-ext.js'); 
+const schemas = {};
 
 // Create validation
-schemas.add = {
+schemas.add{nameAsClass} = {
     alpha: joi.string().optional(),
     beta: joi.string().optional(),
     delta: joi.number().optional(),
@@ -14,19 +14,19 @@ schemas.add = {
 };
 
 // Update validation
-schemas.update = {
+schemas.update{nameAsClass} = {
     alpha: joi.string().optional(),
     start: joi.date().optional(),
     end: joi.date().optional()
 };
 
 // List for query
-schemas.list = {
+schemas.list{nameAsClass} = {
     page: joi.number().min(1).default(1),
     size: joi.number().min(5).max(25).default(10),
     sort: joi.string().valid(['name', 'tag']).default('name'),
-    client: schemas.client,
-    debug: schemas.debug
+    client: joi.clientId(),
+    debug: joi.debug()
 };
 
 module.exports = schemas;

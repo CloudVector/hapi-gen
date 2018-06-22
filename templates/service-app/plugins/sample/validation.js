@@ -1,7 +1,7 @@
 'use strict';
 
-const joi = require('joi');
-const schemas = require('./../../lib/validation.js'); // Get generic validations from lib folder
+const joi = require('./../../lib/joi-ext.js'); // Get generic validations from lib folder
+const schemas = {};
 
 // Add scenario
 schemas.add = {

@@ -1,6 +1,7 @@
 "use strict";
 
 const Boom = require('boom');
+const joi = require('./../../lib/joi-ext.js'); 
 const valid = require('./validation.js');
 
 module.exports.plugin = {
@@ -16,7 +17,6 @@ module.exports.plugin = {
                 try {
                     return await repo.load(request.params.id);
                 } catch (err) {
-                    console.error(err);
                     return Boom.boomify(err, {~lb} statusCode: 400 {~rb});
                 }
             },
@@ -24,11 +24,11 @@ module.exports.plugin = {
                 auth: false,
                 validate: {
                     params: {
-                        id: valid.id
+                        id: joi.id()
                     },
                     query: {
-                        client: valid.client,
-                        debug: valid.debug
+                        client: joi.clientId(),
+                        debug: joi.debug()
                     }
                 },
                 tags: ['api', '{name}'],
@@ -42,14 +42,13 @@ module.exports.plugin = {
                 try {
                     return await repo.list(request.query);
                 } catch (err) {
-                    console.error(err);
                     return Boom.boomify(err, {~lb} statusCode: 400 {~rb});
                 }
             },
             options: {
                 auth: false,
                 validate: {
-                    query: valid.list
+                    query: valid.list{nameAsClass}
                 },
                 tags: ['api', '{name}'],
                 description: 'List of {name} entities'
@@ -62,17 +61,16 @@ module.exports.plugin = {
                 try {
                     return await repo.add(request.payload);
                 } catch (err) {
-                    console.error(err);
                     return Boom.boomify(err, {~lb} statusCode: 400 {~rb});
                 }
             },
             options: {
                 auth: false,
                 validate: {
-                    payload: valid.add,
+                    payload: valid.add{nameAsClass},
                     query: {
-                        client: valid.client,
-                        debug: valid.debug
+                        client: joi.clientId(),
+                        debug: joi.debug()
                     }
                 },
                 tags: ['api', '{name}'],
@@ -86,17 +84,16 @@ module.exports.plugin = {
                 try {
                     return await repo.update(request.payload);
                 } catch (err) {
-                    console.error(err);
                     return Boom.boomify(err, {~lb} statusCode: 400 {~rb});
                 }
             },
             options: {
                 auth: false,
                 validate: {
-                    payload: valid.update,
+                    payload: valid.update{nameAsClass},
                     query: {
-                        client: valid.client,
-                        debug: valid.debug
+                        client: joi.clientId(),
+                        debug: joi.debug()
                     }
                 },
                 tags: ['api', '{name}'],
@@ -110,14 +107,17 @@ module.exports.plugin = {
                 try {
                     return await repo.remove(request.params.id);
                 } catch (err) {
-                    console.error(err);
                     return Boom.boomify(err, {~lb} statusCode: 400 {~rb});
                 }
             },
             options: {
                 auth: false,
                 validate: {
-                    params: valid.id
+                    params: joi.id(),
+                    query: {
+                        client: joi.clientId(),
+                        debug: joi.debug()
+                    }
                 },
                 tags: ['api', '{name}'],
                 description: 'Delete a single {name} entity'
