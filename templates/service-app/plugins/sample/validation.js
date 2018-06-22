@@ -1,10 +1,10 @@
 'use strict';
 
-const joi = require('./../../lib/joi-ext.js'); // Get generic validations from lib folder
+const joi = require('./../../lib/joi-ext.js');
 const schemas = {};
 
 // Add scenario
-schemas.add = {
+schemas.addSample = {
     alpha: joi.string().optional(),
     beta: joi.string().optional(),
     delta: joi.number().optional(),
@@ -14,19 +14,19 @@ schemas.add = {
 };
 
 // For update scenario
-schemas.update = {
+schemas.updateSample = {
     alpha: joi.string().optional(),
     start: joi.date().optional(),
     end: joi.date().optional()
 };
 
 // List for query
-schemas.list = {
+schemas.listSample = {
     page: joi.number().min(1).default(1),
     size: joi.number().min(5).max(25).default(10),
     sort: joi.string().valid(['name', 'tag']).default('name')
 };
 
-schemas.type = joi.string().valid(['alpha', 'beta', 'gamma']).default('alpha');
+schemas.typeSample = joi.string().valid(['alpha', 'beta', 'gamma']).default('alpha');
 
 module.exports = schemas;

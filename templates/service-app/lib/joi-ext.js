@@ -79,7 +79,7 @@ joi.clientId = () => {
 * @method debug
 * @return {object} JOI debug flag
 */
-joi.debug = () => {
+joi.debugFlag = () => {
     return joi.boolean().optional().description('Debug flag');
 };
 

@@ -33,6 +33,8 @@
     "inert": "^5.x",
     "joi": "^13.x",
     "joi-objectid": "^2.x",
+    "joi-phone": "^0.x",
+    "moment": "^2.x",
     "vision": "^5.x"{#hasDb},{/hasDb}
     {#hasElasticSearch}"elasticsearch": "^14.x"{/hasElasticSearch}{#hasMongo}"mongodb": "^3.x"{/hasMongo}{#hasMySql}"mysql": "^2.x"{/hasMySql}
   },

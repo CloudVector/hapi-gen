@@ -35,6 +35,8 @@
     "inert": "^5.x",
     "joi": "^13.x",
     "joi-objectid": "^2.x",
+    "joi-phone": "^0.x",
+    "moment": "^2.x",
     "mongodb": "^3.x",
     "mysql": "^2.x",
     "vision": "^5.x"

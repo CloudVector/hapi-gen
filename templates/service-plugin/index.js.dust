@@ -28,7 +28,7 @@ module.exports.plugin = {
                     },
                     query: {
                         client: joi.clientId(),
-                        debug: joi.debug()
+                        debug: joi.debugFlag()
                     }
                 },
                 tags: ['api', '{name}'],
@@ -70,7 +70,7 @@ module.exports.plugin = {
                     payload: valid.add{nameAsClass},
                     query: {
                         client: joi.clientId(),
-                        debug: joi.debug()
+                        debug: joi.debugFlag()
                     }
                 },
                 tags: ['api', '{name}'],
@@ -93,7 +93,7 @@ module.exports.plugin = {
                     payload: valid.update{nameAsClass},
                     query: {
                         client: joi.clientId(),
-                        debug: joi.debug()
+                        debug: joi.debugFlag()
                     }
                 },
                 tags: ['api', '{name}'],
@@ -116,7 +116,7 @@ module.exports.plugin = {
                     params: joi.id(),
                     query: {
                         client: joi.clientId(),
-                        debug: joi.debug()
+                        debug: joi.debugFlag()
                     }
                 },
                 tags: ['api', '{name}'],

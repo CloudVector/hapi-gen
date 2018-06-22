@@ -1,6 +1,7 @@
 "use strict";
 
 const Boom = require('boom');
+const joi = require('./../../lib/joi-ext.js');
 const valid = require('./validation.js');
 
 module.exports.plugin = {
@@ -12,7 +13,7 @@ module.exports.plugin = {
         {
             path: '/api/sample',
             method: 'GET',
-            handler: async (request, h) => {
+            handler: async (request) => {
                 try {
                     return await repo.list();
                 } catch (err) {
@@ -22,7 +23,7 @@ module.exports.plugin = {
             options: {
                 auth: false,
                 validate: {
-                    query: valid.list
+                    query: valid.listSample
                 },
                 tags: ['api', 'sample'],
                 description: 'List sample'
@@ -31,7 +32,7 @@ module.exports.plugin = {
         {
             path: '/api/sample/{type}',
             method: 'POST',
-            handler: async (request, h) => {
+            handler: async (request) => {
                 try {
                     return await repo.save(request.params.type, request.payload);
                 } catch (err) {
@@ -41,8 +42,8 @@ module.exports.plugin = {
             options: {
                 auth: false,
                 validate: {
-                    params: valid.type,
-                    payload: valid.add
+                    params: valid.typeSample,
+                    payload: valid.addSample
                 },
                 tags: ['api', 'sample'],
                 description: 'Save sample'
@@ -51,7 +52,7 @@ module.exports.plugin = {
         {
             path: '/api/sample/{id}',
             method: 'GET',
-            handler: async (request, h) => {
+            handler: async (request) => {
                 try {
                     return await repo.find(request.params.id);
                 } catch (err) {
@@ -61,7 +62,7 @@ module.exports.plugin = {
             options: {
                 auth: false,
                 validate: {
-                    params: valid.id
+                    params: joi.id()
                 },
                 tags: ['api', 'sample'],
                 description: 'Get a sample'
@@ -70,7 +71,7 @@ module.exports.plugin = {
         {
             path: '/api/sample/{id}',
             method: 'DELETE',
-            handler: async (request, h) => {
+            handler: async (request) => {
                 try {
                     return await repo.remove(request.params.id);
                 } catch (err) {
@@ -80,7 +81,7 @@ module.exports.plugin = {
             options: {
                 auth: false,
                 validate: {
-                    params: valid.id
+                    params: joi.id()
                 },
                 tags: ['api', 'sample'],
                 description: 'Delete a sample'

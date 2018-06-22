@@ -26,7 +26,7 @@ schemas.list{nameAsClass} = {
     size: joi.number().min(5).max(25).default(10),
     sort: joi.string().valid(['name', 'tag']).default('name'),
     client: joi.clientId(),
-    debug: joi.debug()
+    debug: joi.debugFlag()
 };
 
 module.exports = schemas;
