@@ -1,8 +1,8 @@
 "use strict";
 
-const RepositoryBase = require('../../../lib/repository-base.js');
+const RepositoryBase = require('./../../../lib/repository-base.js');
 const SearchModel = require('./searchModel.js');
-const tools = require('../../../src/js/tools.js');
+const tools = require('./../../../src/js/tools.js');
 const internals = {};
 
 /* Calculates page offset */
