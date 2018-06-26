@@ -1,6 +1,6 @@
 'use strict';
 
-const RepositoryBase = require('../../lib/repository-base.js');
+const RepositoryBase = require('./../../lib/repository-base.js');
 const internals = {};
 
 /* Calculates page offset */

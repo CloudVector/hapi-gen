@@ -1,6 +1,6 @@
 "use strict";
 
-const RepositoryBase = require('../../../lib/repository-base.js');
+const RepositoryBase = require('./../../../lib/repository-base.js');
 const NavigationModel = require('./navigationModel.js');
 
 /*
