@@ -1,6 +1,6 @@
 'use strict';
 
-const RepositoryBase = require('../../lib/repository-base.js');
+const RepositoryBase = require('./../../lib/repository-base.js');
 
 /*
 * Data operation component
@@ -31,7 +31,7 @@ class Repository extends RepositoryBase {
     /*
     * Get a list of entities
     * @method list
-    * @param {Object} params
+    * @param {Object} entity
     * @return {Object} result
     */
     list (params) {
@@ -41,10 +41,10 @@ class Repository extends RepositoryBase {
     /*
     * Save entity
     * @method add
-    * @param {Object} payload (entity or entities)
+    * @param {Object} entity
     * @return {Object} result
     */
-    add (payload) {
+    add (entity) {
         let result = {}; // create entity here and save it
         return result;
     }
@@ -52,10 +52,10 @@ class Repository extends RepositoryBase {
     /*
     * Update entity
     * @method update
-    * @param {Object} payload (entity or entities)
+    * @param {Object} entity 
     * @return {Object} result
     */
-    update (payload) {
+    update (entity) {
         let result = {}; // create entity here and save it
         return result;
     }
